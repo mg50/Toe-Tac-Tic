@@ -12,3 +12,8 @@ SYMBOL: _
 
 ! Destructively changes a board cell to a marker
 :: (move!) ( marker x y board -- ) marker x y board nth set-nth ;
+
+:: (move) ( marker x y board -- board' ) [let board [ clone ] map :> board2
+    marker x y board2 (move!)
+    board2
+] ;

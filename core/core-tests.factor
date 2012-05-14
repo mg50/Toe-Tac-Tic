@@ -32,3 +32,12 @@ IN: ttt.core.tests
             board { { O X } { O O } } sequence=
     ] unit-test
 ]
+
+
+! (move) tests
+[let { { X } } :> board
+     _ 0 0 board (move) :> board'
+
+    [ X ] [ 0 0 board marker-at ] unit-test
+    [ _ ] [ 0 0 board' marker-at ] unit-test
+]
