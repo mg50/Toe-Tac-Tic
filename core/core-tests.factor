@@ -36,8 +36,18 @@ IN: ttt.core.tests
 
 ! (move) tests
 [let { { X } } :> board
-     _ 0 0 board (move) :> board'
+    _ 0 0 board (move) :> board'
 
     [ X ] [ 0 0 board marker-at ] unit-test
     [ _ ] [ 0 0 board' marker-at ] unit-test
+]
+
+! try-move tests
+[let { { X } { _ } } :> board
+    O 0 1 board try-move :> board'
+    O 0 0 board try-move :> board''
+
+    [ _ ] [ 0 1 board marker-at ] unit-test
+    [ O ] [ 0 1 board' marker-at ] unit-test
+    [ f ] [ board'' ] unit-test
 ]
