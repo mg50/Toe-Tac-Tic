@@ -7,4 +7,5 @@ SYMBOL: _
 
 : <empty-board> ( size -- board ) dup _ <array> <array> ;
 
-: marker-at ( x y board -- marker ) ?nth ?nth ;
+: marker-at ( x y board -- marker ) nth nth ;
+: occupied? ( x y board -- ? ) marker-at _ eq? not ;
