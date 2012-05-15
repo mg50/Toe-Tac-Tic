@@ -1,4 +1,4 @@
-USING: tools.test ttt.core kernel locals sequences ;
+USING: tools.test ttt.core kernel locals sequences sets ;
 IN: ttt.core.tests
 
 [ -1 <empty-board> ] must-fail
@@ -76,4 +76,18 @@ IN: ttt.core.tests
 
 [let { { X _ O } { _ O X } { O X _ } } :> board
     [ t ] [ board right-diag { O O O } sequence= ] unit-test
+]
+
+! lines
+[let { { X O } { _ O } } :> board
+    [ t ] [ board lines { { X O } { _ O } { X _ } { O O } { O _ } } set= ] unit-test
+]
+
+[let { { X O _ } { _ O X } { _ _ _ } } :> board
+    [ t ] [ board lines {
+        { X O _ } { _ O X } { _ _ _ }
+        { X _ _ } { O O _ } { _ X _ }
+        { X O _ } { _ O _ }
+    }
+    set= ] unit-test
 ]

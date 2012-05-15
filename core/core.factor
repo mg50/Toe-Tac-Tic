@@ -1,4 +1,4 @@
-USING: kernel arrays sequences locals math ;
+USING: kernel arrays sequences locals math sets combinators ;
 IN: ttt.core
 
 SYMBOL: X
@@ -30,3 +30,7 @@ SYMBOL: _
 : left-diag ( board -- x ) [ swap nth  ] map-index ;
 
 : right-diag ( board -- x ) dup length 1 - [ swap - swap nth ] curry map-index ;
+
+! Retrieves all lines from a board, removing duplicates
+: lines ( board -- x ) { [ rows ] [ columns ] [ left-diag ] [  right-diag ] }
+    cleave 2array 3append members ;
