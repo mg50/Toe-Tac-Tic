@@ -33,3 +33,5 @@ SYMBOL: _
     cleave 2array 3append members ;
 
 : board-full? ( board -- ? ) concat [ _ = ] any? not ;
+
+: winning-line ( marker board -- line ) length swap <array> ;

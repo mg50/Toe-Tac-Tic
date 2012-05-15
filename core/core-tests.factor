@@ -98,3 +98,7 @@ IN: ttt.core.tests
 [ f ] [ { { X X } { _ O } } board-full? ] unit-test
 [ t ] [ { { X O X } { O O O } { X X X } } board-full? ] unit-test
 [ f ] [ { { X O X } { _ O O } { X _ X } } board-full? ] unit-test
+
+! winning-line
+[ t ] [ X { { X O } { O X } } winning-line { X X } sequence= ] unit-test
+[ t ] [ O { { _ _ _ } { _ O _ } { _ O O } } winning-line { O O O } sequence= ] unit-test
