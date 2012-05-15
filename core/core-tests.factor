@@ -111,3 +111,9 @@ IN: ttt.core.tests
     [ t ] [ X board winner? ] unit-test
     [ f ] [ O board winner? ] unit-test
 ]
+
+! winner-exists?
+[ f ] [ { { _ _ } { _ _ } } winner-exists? ] unit-test
+[ t ] [ { { X X } { O O } } winner-exists? ] unit-test
+[ t ] [ { { X O _ } { O X _ } { O _ X } } winner-exists? ] unit-test
+[ f ] [ { { X O _ } { O X _ } { O _ _ } } winner-exists? ] unit-test

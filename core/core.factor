@@ -37,3 +37,4 @@ SYMBOL: _
 : winning-line ( marker board -- line ) length swap <array> ;
 
 : winner? ( marker board -- ? ) dup swapd winning-line [ = ] curry swap lines swap any? ;
+: winner-exists? ( board -- ? ) [ X swap winner? ] [ O swap winner? ] bi or ;
