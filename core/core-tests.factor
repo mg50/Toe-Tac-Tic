@@ -91,3 +91,10 @@ IN: ttt.core.tests
     }
     set= ] unit-test
 ]
+
+
+! board-full?
+[ t ] [ { { X X } { O O } } board-full? ] unit-test
+[ f ] [ { { X X } { _ O } } board-full? ] unit-test
+[ t ] [ { { X O X } { O O O } { X X X } } board-full? ] unit-test
+[ f ] [ { { X O X } { _ O O } { X _ X } } board-full? ] unit-test

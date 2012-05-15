@@ -24,13 +24,12 @@ SYMBOL: _
     [ drop 3drop f ] [ (move) ] if ;
 
 : rows ( board -- x ) ;
-
 : columns ( board -- x ) flip ;
-
 : left-diag ( board -- x ) [ swap nth  ] map-index ;
-
 : right-diag ( board -- x ) dup length 1 - [ swap - swap nth ] curry map-index ;
 
 ! Retrieves all lines from a board, removing duplicates
 : lines ( board -- x ) { [ rows ] [ columns ] [ left-diag ] [  right-diag ] }
     cleave 2array 3append members ;
+
+: board-full? ( board -- ? ) concat [ _ = ] any? not ;
