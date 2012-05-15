@@ -102,3 +102,12 @@ IN: ttt.core.tests
 ! winning-line
 [ t ] [ X { { X O } { O X } } winning-line { X X } sequence= ] unit-test
 [ t ] [ O { { _ _ _ } { _ O _ } { _ O O } } winning-line { O O O } sequence= ] unit-test
+
+! winner?
+[ t ] [ X { { X X } { O O } } winner? ] unit-test
+[ t ] [ O { { X X } { O O } } winner? ] unit-test
+[ f ] [ O { { X X } { _ O } } winner? ] unit-test
+[let { { X O _ } { O X _ } { O _ X } } :> board
+    [ t ] [ X board winner? ] unit-test
+    [ f ] [ O board winner? ] unit-test
+]

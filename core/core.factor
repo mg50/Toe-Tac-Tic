@@ -35,3 +35,5 @@ SYMBOL: _
 : board-full? ( board -- ? ) concat [ _ = ] any? not ;
 
 : winning-line ( marker board -- line ) length swap <array> ;
+
+: winner? ( marker board -- ? ) dup swapd winning-line [ = ] curry swap lines swap any? ;
