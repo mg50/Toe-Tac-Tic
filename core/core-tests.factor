@@ -51,3 +51,29 @@ IN: ttt.core.tests
     [ O ] [ 0 1 board' marker-at ] unit-test
     [ f ] [ board'' ] unit-test
 ]
+
+[let { { X X } { O O } } :> board
+    [ t ] [ board rows board eq? ] unit-test
+]
+
+[let { { X X } { O X } } :> board
+    [ t ] [ board columns { { X O } { X X } } sequence= ] unit-test
+]
+
+! left-diag
+[let { { X X X } { _ _ _ } { O O O } } :> board
+    [ t ] [ board left-diag { X _ O } sequence= ] unit-test
+]
+
+[let { { X _ O } { _ O X } { O X _ } } :> board
+    [ t ] [ board left-diag { X O _ } sequence= ] unit-test
+]
+
+! right-diag
+[let { { X X X } { _ _ _ } { O O O } } :> board
+    [ t ] [ board right-diag { X _ O } sequence= ] unit-test
+]
+
+[let { { X _ O } { _ O X } { O X _ } } :> board
+    [ t ] [ board right-diag { O O O } sequence= ] unit-test
+]

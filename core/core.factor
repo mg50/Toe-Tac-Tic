@@ -22,3 +22,11 @@ SYMBOL: _
 
 : try-move ( marker x y board -- board? ) 3dup occupied?
     [ drop 3drop f ] [ (move) ] if ;
+
+: rows ( board -- x ) ;
+
+: columns ( board -- x ) flip ;
+
+: left-diag ( board -- x ) [ swap nth  ] map-index ;
+
+: right-diag ( board -- x ) dup length 1 - [ swap - swap nth ] curry map-index ;
