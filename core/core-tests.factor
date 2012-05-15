@@ -117,3 +117,11 @@ IN: ttt.core.tests
 [ t ] [ { { X X } { O O } } winner-exists? ] unit-test
 [ t ] [ { { X O _ } { O X _ } { O _ X } } winner-exists? ] unit-test
 [ f ] [ { { X O _ } { O X _ } { O _ _ } } winner-exists? ] unit-test
+
+! draw?
+[ f ] [ { { _ _ } { _ _ } } draw? ] unit-test
+[ f ] [ { { X _ } { O _ } } draw? ] unit-test
+[ f ] [ { { X X } { O _ } } draw? ] unit-test
+[ f ] [ { { X O } { O _ } } draw? ] unit-test
+[ f ] [ { { X X X } { _ _ _ } { _ _ _ } } draw? ] unit-test
+[ t ] [ { { O X O } { X X O } { O O X } } draw? ] unit-test

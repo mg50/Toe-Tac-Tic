@@ -38,3 +38,4 @@ SYMBOL: _
 
 : winner? ( marker board -- ? ) dup swapd winning-line [ = ] curry swap lines swap any? ;
 : winner-exists? ( board -- ? ) [ X swap winner? ] [ O swap winner? ] bi or ;
+: draw? ( board -- ? ) [ winner-exists? not ] [ board-full? ] bi and ;
