@@ -23,3 +23,11 @@ IN: ttt.ui.console.tests
 [ "X" ] [ X display-marker ] unit-test
 [ "O" ] [ O display-marker ] unit-test
 [ " " ] [ _ display-marker ] unit-test
+
+! display-column
+[ "X|X|X" ] [ { X X X } display-column ] unit-test
+[ "O| |X" ] [ { O _ X } display-column ] unit-test
+
+! make-separator
+[ "---" ] [ { 1 2 3 } make-separator ] unit-test
+[ "----" ] [ { { } { } { } { } } make-separator ] unit-test

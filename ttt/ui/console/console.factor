@@ -1,4 +1,4 @@
-USING: kernel ttt.ui io math.parser regexp sequences ttt.core namespaces ;
+USING: kernel ttt.ui io math.parser regexp sequences ttt.core namespaces arrays ;
 IN: ttt.ui.console
 
 TUPLE: console-ui < ui ;
@@ -17,3 +17,5 @@ M: console-ui print-message ( message ui -- ) drop print ;
 " " _ set
 
 : display-marker ( marker -- string ) get ;
+: display-column ( coll -- string ) [ display-marker ] map "|" join ;
+: make-separator ( seq -- string ) length "-" <array> "" join ;
