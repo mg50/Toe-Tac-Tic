@@ -18,4 +18,5 @@ M: console-ui print-message ( message ui -- ) drop print ;
 
 : display-marker ( marker -- string ) get ;
 : display-column ( coll -- string ) [ display-marker ] map "|" join ;
-: make-separator ( seq -- string ) length "-" <array> "" join ;
+: make-separator ( seq -- string ) length "-" <array> "" join "\n" prepend "\n" append ;
+: display-board ( board -- string ) [ display-column ] map dup make-separator join ;

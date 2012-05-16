@@ -29,5 +29,9 @@ IN: ttt.ui.console.tests
 [ "O| |X" ] [ { O _ X } display-column ] unit-test
 
 ! make-separator
-[ "---" ] [ { 1 2 3 } make-separator ] unit-test
-[ "----" ] [ { { } { } { } { } } make-separator ] unit-test
+[ "\n---\n" ] [ { 1 2 3 } make-separator ] unit-test
+[ "\n----\n" ] [ { { } { } { } { } } make-separator ] unit-test
+
+! display-board
+[ "X|O\n--\n |O" ] [ { { X O } { _ O } } display-board ] unit-test
+[ "X|X|X\n---\nO| | \n---\nO|O|O" ] [ { { X X X } { O _ _ } { O O O } } display-board ] unit-test
