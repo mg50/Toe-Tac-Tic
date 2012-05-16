@@ -8,6 +8,10 @@ CONSTANT: -infinity -1
 
 : coords ( board -- seq ) length [0,b) dup cartesian-product concat ; inline
 
+
+:: map-each-coord ( board quot -- seq )
+    board coords [ 2array@ board quot call ] map ; inline
+
 : leaf-score ( board -- n ) {
     { [ dup X swap winner? ] [ drop infinity ] }
     { [ dup O swap winner? ] [ drop -infinity ] }
