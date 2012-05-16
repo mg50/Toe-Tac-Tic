@@ -2,5 +2,6 @@ IN: ttt.ui
 
 TUPLE: ui ;
 
+GENERIC: update-display ( -- )
 GENERIC: print-message ( message ui -- )
-GENERIC: get-move ( ui -- x y )
+GENERIC: get-next-move ( ui -- x y )
