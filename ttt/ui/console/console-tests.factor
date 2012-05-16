@@ -2,8 +2,7 @@ USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core
 IN: ttt.ui.console.tests
 
 : unit-test-with-string-writer ( quot1 quot2 -- ) [ with-string-writer ] curry unit-test ;
-
-! : unit-test-with-string-reader
+: unit-test-with-string-reader ( quot1 quot2 string -- ) [ swap with-string-reader ] 2curry unit-test ;
 
 ! print-message
 [ "Hello\n" ]  [ "Hello" <console-ui> print-message ] unit-test-with-string-writer
