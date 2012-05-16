@@ -15,7 +15,15 @@ IN: ttt.strategy.ai.tests
     [ board [ 3dup marker-at swap drop 3array ] map-each-coord ] unit-test-same-members
 ]
 
+! leaf-score
 [ 1 ] [ { { X X } { O _ } } leaf-score ] unit-test
 [ -1 ] [ { { O O } { X _ } } leaf-score ] unit-test
 [ 0 ] [ { { X _ } { _ O } } leaf-score ] unit-test
 [ 1 ] [ { { X O _ } { _ X _ } { O O X } } leaf-score ] unit-test
+
+! child-nodes
+[let { { X O } { _ _ } } :> board
+    [ { { { X O } { X _ } }
+        { { X O } { _ X } } } ]
+    [ X board child-nodes ] unit-test-same-members
+]
