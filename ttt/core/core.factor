@@ -14,7 +14,7 @@ SYMBOL: _
 : occupied? ( x y board -- ? ) marker-at _ eq? not ;
 
 ! Destructively changes a board cell to a marker
-:: (move!) ( marker x y board -- ) marker x y board nth set-nth ;
+: (move!) ( marker x y board -- ) nth set-nth ;
 
 ! Returns a mutated copy of a board with a marker placed in a cell
 :: (move) ( marker x y board -- board' ) [let
