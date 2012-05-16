@@ -1,3 +1,4 @@
+USING: accessors ;
 IN: ttt.strategy
 
 TUPLE: strategy marker ;
