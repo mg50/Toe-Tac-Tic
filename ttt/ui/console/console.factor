@@ -20,3 +20,4 @@ M: console-ui print-message ( message ui -- ) drop print ;
 : display-column ( coll -- string ) [ display-marker ] map "|" join ;
 : make-separator ( seq -- string ) length "-" <array> "" join "\n" prepend "\n" append ;
 : display-board ( board -- string ) [ display-column ] map dup make-separator join ;
+M: console-ui update-display ( board ui -- ) drop display-board "\n" append print ;

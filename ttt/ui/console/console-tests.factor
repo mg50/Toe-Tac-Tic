@@ -1,4 +1,4 @@
-USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core ;
+USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core locals ;
 IN: ttt.ui.console.tests
 
 : unit-test-with-string-writer ( quot1 quot2 -- ) [ with-string-writer ] curry unit-test ;
@@ -35,3 +35,9 @@ IN: ttt.ui.console.tests
 ! display-board
 [ "X|O\n--\n |O" ] [ { { X O } { _ O } } display-board ] unit-test
 [ "X|X|X\n---\nO| | \n---\nO|O|O" ] [ { { X X X } { O _ _ } { O O O } } display-board ] unit-test
+
+! update-display method
+[let <console-ui> :> ui
+    [ "X|O\n--\n |O\n\n" ] [ { { X O } { _ O } } ui update-display ] unit-test-with-string-writer
+    [ "X|X|X\n---\nO| | \n---\nO|O|O\n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] unit-test-with-string-writer
+]
