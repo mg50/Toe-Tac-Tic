@@ -1,4 +1,4 @@
-USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ;
+USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core ;
 IN: ttt.ui.console.tests
 
 : unit-test-with-string-writer ( quot1 quot2 -- ) [ with-string-writer ] curry unit-test ;
@@ -18,3 +18,8 @@ IN: ttt.ui.console.tests
 ! parse-move-string
 [ { 1 2 } ] [ "1 2" parse-move-string 2array ] unit-test
 [ { 3 4 } ] [ "3 4" parse-move-string 2array ] unit-test
+
+! display-marker
+[ "X" ] [ X display-marker ] unit-test
+[ "O" ] [ O display-marker ] unit-test
+[ " " ] [ _ display-marker ] unit-test
