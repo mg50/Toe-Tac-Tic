@@ -5,6 +5,9 @@ SYMBOL: X
 SYMBOL: O
 SYMBOL: _
 
+! Consumes sequnece and places the first and second elements onto the stack - opposite of 2array.
+: 2array@ ( seq -- x y ) [ first ] [ second ] bi ;
+
 : <empty-board> ( size -- board ) dup _ <array> <array> ;
 
 : marker-at ( x y board -- marker ) nth nth ;
