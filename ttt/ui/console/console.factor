@@ -28,3 +28,6 @@ M: console-ui update-display ( board ui -- ) drop display-board "\n" append prin
     [ move valid-move-string? ] [ readln move! ] do until
     move parse-move-string
 ] ;
+
+:: (prompt-move-until-available) ( board -- x y ) f f [ 2dup board available? ]
+    [ 2drop (prompt-move) ] do until ;
