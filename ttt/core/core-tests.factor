@@ -1,6 +1,9 @@
 USING: tools.test ttt.core kernel locals sequences sets ;
 IN: ttt.core.tests
 
+[ O ] [ X other-marker ] unit-test
+[ X ] [ O other-marker ] unit-test
+
 [ 1 2 ] [ { 1 2 } 2array@ ] unit-test
 [ 4 5 ] [ { 4 5 6 } 2array@ ] unit-test
 [ { 1 } 2array@ ] must-fail

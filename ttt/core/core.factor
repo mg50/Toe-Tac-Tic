@@ -5,6 +5,8 @@ SYMBOL: X
 SYMBOL: O
 SYMBOL: _
 
+: other-marker ( marker -- marker ) X = [ O ] [ X ] if ;
+
 ! Consumes sequence and places the first and second elements onto the stack - opposite of 2array.
 : 2array@ ( seq -- x y ) [ first ] [ second ] bi ;
 
