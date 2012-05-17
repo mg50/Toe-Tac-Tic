@@ -8,6 +8,11 @@ IN: ttt.core.tests
 [ 4 5 ] [ { 4 5 6 } 2array@ ] unit-test
 [ { 1 } 2array@ ] must-fail
 
+[ 1 2 3 ] [ { 1 2 3 } 3array@ ] unit-test
+[ 4 5 6 ] [ { 4 5 6 } 3array@ ] unit-test
+[ 1 2 3 ] [ { 1 2 3 4 } 3array@ ] unit-test
+[ { 1 2 } 3array@ ] must-fail
+
 [ -1 <empty-board> ] must-fail
 [ { } ] [ 0 <empty-board> ] unit-test
 [ { { _ } } ] [ 1 <empty-board> ] unit-test
@@ -16,21 +21,32 @@ IN: ttt.core.tests
 
 
 [ _ ] [ 1 1 2 <empty-board> marker-at ] unit-test
+
+! marker-at
 [ O ] [ 1 0 { { X O } } marker-at ] unit-test
 [ X ] [ 1 0 { { O X } } marker-at ] unit-test
 [ 3 3 { { X } { X } } marker-at ] must-fail
 [ _ ] [ 1 1 { { X X X } { X _ X } { O O O } } marker-at ] unit-test
 
+! occupied?
 [ t ] [ 0 0 { { X O } } occupied? ] unit-test
 [ f ] [ 0 0 { { _ X } } occupied? ] unit-test
 [ t ] [ 1 0 { { _ X } } occupied? ] unit-test
 [ 3 3 { { _ X } } occupied? ] must-fail
 
+! in-bounds?
 [ t ] [ 0 0 { { X O } } in-bounds? ] unit-test
 [ f ] [ 1 0 { { X O } } in-bounds? ] unit-test
 [ t ] [ 1 1 { { X O } { O X } } in-bounds? ] unit-test
 [ f ] [ 1 2 { { X O } { O X } } in-bounds? ] unit-test
 [ f ] [ 2 1 { { X O } { O X } } in-bounds? ] unit-test
+
+! available?
+[ f ] [ 0 0 { { X O } } available? ] unit-test
+[ t ] [ 0 0 { { _ X } } available? ] unit-test
+[ f ] [ 1 0 { { _ X } } available? ] unit-test
+[ f ] [ 1 1 { { _ X } } available? ] unit-test
+
 
 
 ! (move!) tests

@@ -9,15 +9,16 @@ SYMBOL: _
 
 ! Consumes sequence and places the first and second elements onto the stack - opposite of 2array.
 : 2array@ ( seq -- x y ) [ first ] [ second ] bi ;
+: 3array@ ( seq -- x y z ) [ first ] [ second ] [ third ] tri ;
 
 : <empty-board> ( size -- board ) dup _ <array> <array> ;
 
 : marker-at ( x y board -- marker ) nth nth ;
 : occupied? ( x y board -- ? ) marker-at _ eq? not ;
-
-
 :: in-bounds? ( x y board -- ? ) x y [ 0 >= ] bi@ and
     x y [ board length < ] bi@ and and ;
+
+: available? ( x y board -- ? ) [ 3array ] [ ] 3bi in-bounds? [ 3array@ occupied? not ] [ drop f ] if ;
 
 ! Destructively changes a board cell to a marker
 : (move!) ( marker x y board -- ) nth set-nth ;
