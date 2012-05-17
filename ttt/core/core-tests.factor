@@ -26,6 +26,12 @@ IN: ttt.core.tests
 [ t ] [ 1 0 { { _ X } } occupied? ] unit-test
 [ 3 3 { { _ X } } occupied? ] must-fail
 
+[ t ] [ 0 0 { { X O } } in-bounds? ] unit-test
+[ f ] [ 1 0 { { X O } } in-bounds? ] unit-test
+[ t ] [ 1 1 { { X O } { O X } } in-bounds? ] unit-test
+[ f ] [ 1 2 { { X O } { O X } } in-bounds? ] unit-test
+[ f ] [ 2 1 { { X O } { O X } } in-bounds? ] unit-test
+
 
 ! (move!) tests
 [ O ] [ [let { { X } } :> board

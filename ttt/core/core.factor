@@ -15,6 +15,10 @@ SYMBOL: _
 : marker-at ( x y board -- marker ) nth nth ;
 : occupied? ( x y board -- ? ) marker-at _ eq? not ;
 
+
+:: in-bounds? ( x y board -- ? ) x y [ 0 >= ] bi@ and
+    x y [ board length < ] bi@ and and ;
+
 ! Destructively changes a board cell to a marker
 : (move!) ( marker x y board -- ) nth set-nth ;
 
