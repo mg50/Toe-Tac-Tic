@@ -41,12 +41,12 @@ IN: ttt.ui.console.tests
     [ "X|X|X\n---\nO| | \n---\nO|O|O\n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] unit-test-with-string-writer
 ]
 
-! (prompt-move)
-[ 1 2 ] [ (prompt-move) ] "1 2" unit-test-with-string-reader
-[ 1 2 ] [ (prompt-move) ] "1 2    \n\n" unit-test-with-string-reader
-[ 3 5 ] [ (prompt-move) ] "3 5" unit-test-with-string-reader
-[ 1 2 ] [ (prompt-move) ] "test\n1 2" unit-test-with-string-reader
-[ 5 2 ] [ (prompt-move) ] "5\n5 2" unit-test-with-string-reader
+! (prompt-move-until-valid)
+[ 1 2 ] [ (prompt-move-until-valid) ] "1 2" unit-test-with-string-reader
+[ 1 2 ] [ (prompt-move-until-valid) ] "1 2    \n\n" unit-test-with-string-reader
+[ 3 5 ] [ (prompt-move-until-valid) ] "3 5" unit-test-with-string-reader
+[ 1 2 ] [ (prompt-move-until-valid) ] "test\n1 2" unit-test-with-string-reader
+[ 5 2 ] [ (prompt-move-until-valid) ] "5\n5 2" unit-test-with-string-reader
 
 ! (prompt-move-until-available)
 [ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "0 0" unit-test-with-string-reader
