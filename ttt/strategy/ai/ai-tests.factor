@@ -26,4 +26,20 @@ IN: ttt.strategy.ai.tests
     [ { { { X O } { X _ } }
         { { X O } { _ X } } } ]
     [ X board child-nodes ] unit-test-same-members
+
+    [ { { { X O } { O _ } }
+        { { X O } { _ O } } } ]
+    [ O board child-nodes ] unit-test-same-members
+]
+
+[let { { X X O } { O O _ } { _ _ X } } :> board
+    [ { { { X X O } { O O X } { _ _ X } }
+        { { X X O } { O O _ } { X _ X } }
+        { { X X O } { O O _ } { _ X X } } } ]
+    [ X board child-nodes ] unit-test-same-members
+
+    [ { { { X X O } { O O O } { _ _ X } }
+        { { X X O } { O O _ } { O _ X } }
+        { { X X O } { O O _ } { _ O X } } } ]
+    [ O board child-nodes ] unit-test-same-members
 ]
