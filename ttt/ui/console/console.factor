@@ -31,3 +31,6 @@ M: console-ui update-display ( board ui -- ) drop display-board "\n" append prin
 :: (prompt-move-until-available) ( board -- x y ) f f
     [ 2dup board available? ]
     [ 2drop (prompt-move-until-valid) ] do until ;
+
+M: console-ui prompt-move ( board ui -- x y )
+    "Please enter your move:" swap print-message (prompt-move-until-available) ;
