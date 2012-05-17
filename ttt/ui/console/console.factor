@@ -24,7 +24,8 @@ M: console-ui print-message ( message ui -- ) drop print ;
 : display-board ( board -- string ) [ display-column ] map dup make-separator join ;
 M: console-ui update-display ( board ui -- ) drop display-board "\n" append print ;
 
-: (prompt-move) ( -- x y ) f [ dup valid-move-string?  ] [ drop readln ]
+: (prompt-move) ( -- x y ) f
+    [ dup valid-move-string? ] [ drop readln ]
     do until parse-move-string ;
 
 :: (prompt-move-until-available) ( board -- x y ) f f [ 2dup board available? ]
