@@ -53,3 +53,4 @@ IN: ttt.ui.console.tests
 [ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "1 2\n0 0" unit-test-with-string-reader
 [ 1 0 ] [ { { O _ } { _ _ } } (prompt-move-until-available) ] "1 0" unit-test-with-string-reader
 [ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "0 0\n1 0" unit-test-with-string-reader
+[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "33 11\n1 0" unit-test-with-string-reader
