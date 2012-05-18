@@ -10,3 +10,5 @@ TUPLE: game player-X player-O current-player board ui ;
     [ current-player>> ] [ player-O>> ]
     [ player-X>> ] [ player-O>> ]
 } cleave [ = ] 2dip [ [ ] curry ] bi@ if ;
+
+: switch-current-player ( game -- game ) dup other-player >>current-player ;
