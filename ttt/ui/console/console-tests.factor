@@ -3,8 +3,8 @@ IN: ttt.ui.console.tests
 
 
 ! print-message
-[ "Hello\n" ]  [ "Hello" <console-ui> print-message ] unit-test-with-string-writer
-[ "Goodbye\n" ] [ "Goodbye" <console-ui> print-message ] unit-test-with-string-writer
+[ "Hello\n" ] [ "Hello" <console-ui> print-message ] output>stack unit-test
+[ "Goodbye\n" ] [ "Goodbye" <console-ui> print-message ] output>stack unit-test
 
 ! valid-move-stringt?
 [ t ] [ "123 432" valid-move-string? ] unit-test
@@ -35,20 +35,20 @@ IN: ttt.ui.console.tests
 
 ! update-display method
 [let <console-ui> :> ui
-    [ "X|O\n--\n |O\n\n" ] [ { { X O } { _ O } } ui update-display ] unit-test-with-string-writer
-    [ "X|X|X\n---\nO| | \n---\nO|O|O\n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] unit-test-with-string-writer
+    [ "X|O\n--\n |O\n\n" ] [ { { X O } { _ O } } ui update-display ] output>stack unit-test
+    [ "X|X|X\n---\nO| | \n---\nO|O|O\n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] output>stack unit-test
 ]
 
 ! (prompt-move-until-valid)
-[ 1 2 ] [ (prompt-move-until-valid) ] "1 2" unit-test-with-string-reader
-[ 1 2 ] [ (prompt-move-until-valid) ] "1 2    \n\n" unit-test-with-string-reader
-[ 3 5 ] [ (prompt-move-until-valid) ] "3 5" unit-test-with-string-reader
-[ 1 2 ] [ (prompt-move-until-valid) ] "test\n1 2" unit-test-with-string-reader
-[ 5 2 ] [ (prompt-move-until-valid) ] "5\n5 2" unit-test-with-string-reader
+[ 1 2 ] [ (prompt-move-until-valid) ] "1 2" string>input unit-test
+[ 1 2 ] [ (prompt-move-until-valid) ] "1 2    \n\n" string>input unit-test
+[ 3 5 ] [ (prompt-move-until-valid) ] "3 5" string>input unit-test
+[ 1 2 ] [ (prompt-move-until-valid) ] "test\n1 2" string>input unit-test
+[ 5 2 ] [ (prompt-move-until-valid) ] "5\n5 2" string>input unit-test
 
 ! (prompt-move-until-available)
-[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "0 0" unit-test-with-string-reader
-[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "1 2\n0 0" unit-test-with-string-reader
-[ 1 0 ] [ { { O _ } { _ _ } } (prompt-move-until-available) ] "1 0" unit-test-with-string-reader
-[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "0 0\n1 0" unit-test-with-string-reader
-[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "33 11\n1 0" unit-test-with-string-reader
+[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "0 0" string>input unit-test
+[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "1 2\n0 0" string>input unit-test
+[ 1 0 ] [ { { O _ } { _ _ } } (prompt-move-until-available) ] "1 0" string>input unit-test
+[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "0 0\n1 0" string>input unit-test
+[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "33 11\n1 0" string>input unit-test
