@@ -3,7 +3,7 @@ IN: ttt.game
 
 TUPLE: game player-X player-O current-player board ui ;
 
-: <game> ( -- g ) game new ;
+: <game> ( ui -- g ) game new swap >>ui ;
 
 
 : other-player ( game -- player ) {
