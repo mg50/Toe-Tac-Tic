@@ -154,3 +154,12 @@ IN: ttt.core.tests
 [ f ] [ { { X O } { O _ } } draw? ] unit-test
 [ f ] [ { { X X X } { _ _ _ } { _ _ _ } } draw? ] unit-test
 [ t ] [ { { O X O } { X X O } { O O X } } draw? ] unit-test
+
+
+! game-over?
+[ f ] [ { { _ _ } { _ _ } } game-over? ] unit-test
+[ f ] [ { { X _ } { O _ } } game-over? ] unit-test
+[ t ] [ { { X X } { O _ } } game-over? ] unit-test
+[ t ] [ { { X O } { O _ } } game-over? ] unit-test
+[ t ] [ { { X X X } { _ _ _ } { _ _ _ } } game-over? ] unit-test
+[ t ] [ { { O X O } { X X O } { O O X } } game-over? ] unit-test
