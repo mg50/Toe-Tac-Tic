@@ -40,12 +40,12 @@ IN: ttt.game.tests
     f <game> :> game
     game { { _ _ } { _ _ } } >>board drop
 
-    [ { 3 2 1 } ]
+    game [ { 3 2 1 } ] curry
     [ game
       [
           accumulator counter suffix accumulator!
           counter 1 - counter!
-          counter 0 = [ { { X X } { _ _ } } >>board drop ] [ drop ] if
+          counter 0 = [ { { X X } { _ _ } } >>board ] [ ] if
       ] do-until-game-over
       accumulator
     ] unit-test
@@ -64,7 +64,7 @@ IN: ttt.game.tests
     px >>player-X
     po >>player-O drop
 
-    [ { { X _ } { _ _ } } ] [ game full-turn game board>> ] output>store unit-test
+    [ { { X _ } { _ _ } } ] [ game full-turn board>> ] output>store unit-test
 
     [ O ] [ game current-player>> marker>> ] unit-test
 ]
@@ -83,7 +83,7 @@ IN: ttt.game.tests
     po >>player-O
     po >>current-player drop
 
-    [ { { X _ } { O X } } ] [ game [ full-turn ] [ full-turn ] bi game board>> ] output>store unit-test
+    [ { { X _ } { O X } } ] [ game full-turn full-turn board>> ] output>store unit-test
 
     [ O ] [ game current-player>> marker>> ] unit-test
 ]

@@ -13,12 +13,12 @@ TUPLE: game player-X player-O current-player board ui ;
 
 : switch-current-player ( game -- game ) dup other-player >>current-player ;
 
-:: do-until-game-over ( game quot: ( ... g -- ... ) -- )
-    [ game board>> game-over? ] [ game quot call ] do until ; inline
+: do-until-game-over ( game quot: ( ..g -- ..g ) -- game )
+    [ dup board>> game-over? ] swap do until ; inline
 
-: full-turn ( game -- ) [
+: full-turn ( game -- game ) [
     [ board>> ] [ ui>> ] [ current-player>> ]
     tri get-and-make-move
-] [ switch-current-player drop ] bi ;
+] [ switch-current-player ] bi ;
 
-: play-game-to-end ( game -- ) [ full-turn ] do-until-game-over ;
+: play-game-to-end ( game -- game ) [ full-turn ] do-until-game-over ;
