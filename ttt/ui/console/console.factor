@@ -4,6 +4,7 @@ IN: ttt.ui.console
 TUPLE: console-ui < ui ;
 
 CONSTANT: valid-move-regex R/ ^\d+ \d+\s*$/
+CONSTANT: move-request-message "Please enter your next move:"
 
 : <console-ui> ( -- c ) console-ui new ;
 
@@ -33,4 +34,4 @@ M: console-ui update-display ( board ui -- ) drop display-board "\n" append prin
     [ 2drop (prompt-move-until-valid) ] do until ;
 
 M: console-ui prompt-move ( board ui -- x y )
-    "Please enter your move:" swap print-message (prompt-move-until-available) ;
+    move-request-message swap print-message (prompt-move-until-available) ;
