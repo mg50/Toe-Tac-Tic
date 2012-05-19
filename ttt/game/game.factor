@@ -1,4 +1,4 @@
-USING: kernel accessors locals accessors combinators ttt.core ;
+USING: kernel accessors locals accessors combinators ttt.core ttt.player ;
 IN: ttt.game
 
 TUPLE: game player-X player-O current-player board ui ;
@@ -15,3 +15,10 @@ TUPLE: game player-X player-O current-player board ui ;
 
 :: do-until-game-over ( game quot: ( ... g -- ... ) -- )
     [ game board>> game-over? ] [ game quot call ] do until ; inline
+
+: full-turn ( game -- ) [
+    [ board>> ] [ ui>> ] [ current-player>> ]
+    tri get-and-make-move
+] [ switch-current-player drop ] bi ;
+
+: play-game-to-end ( game -- ) [ full-turn ] do-until-game-over ;

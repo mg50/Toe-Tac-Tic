@@ -1,4 +1,4 @@
-USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math io  prettyprint ;
+USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math ttt.strategy.mock ttt.player ttt.ui.console ttt.tools.test io prettyprint ;
 IN: ttt.game.tests
 
 ! other-player
@@ -48,6 +48,42 @@ IN: ttt.game.tests
           counter 0 = [ { { X X } { _ _ } } >>board drop ] [ drop ] if
       ] do-until-game-over
       accumulator
-    ]
-    unit-test
+    ] unit-test
+]
+
+! full-turn
+[let
+    game new :> game
+
+    X { { 0 0 } } <mock-strategy> <player> :> px
+    O { { 1 1 } } <mock-strategy> <player> :> po
+
+    game { { _ _ } { _ _ } } >>board
+    <console-ui> >>ui
+    px >>current-player
+    px >>player-X
+    po >>player-O drop
+
+    [ { { X _ } { _ _ } } ] [ game full-turn game board>> ] output>store unit-test
+
+    [ O ] [ game current-player>> marker>> ] unit-test
+]
+
+
+! full-turn
+[let
+    game new :> game
+
+    X { { 1 1 } } <mock-strategy> <player> :> px
+    O { { 0 1 } } <mock-strategy> <player> :> po
+
+    game { { X _ } { _ _ } } >>board
+    <console-ui> >>ui
+    px >>player-X
+    po >>player-O
+    po >>current-player drop
+
+    [ { { X _ } { O X } } ] [ game [ full-turn ] [ full-turn ] bi game board>> ] output>store unit-test
+
+    [ O ] [ game current-player>> marker>> ] unit-test
 ]
