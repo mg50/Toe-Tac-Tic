@@ -102,5 +102,5 @@ IN: ttt.game.tests
     px >>current-player
     po >>player-O drop
 
-!    [ { { X _ _ } { O X O } { _ _ X } } ] [ game play-game-to-end board>> ] output>store unit-test
+    [ { { X _ _ } { O X O } { _ _ X } } ] [ game play-game-to-end board>> ] output>store unit-test
 ]
