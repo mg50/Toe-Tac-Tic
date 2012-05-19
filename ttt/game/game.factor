@@ -1,4 +1,4 @@
-USING: kernel accessors locals accessors combinators ttt.core ttt.player ;
+USING: kernel accessors locals accessors combinators ttt.core ttt.player prettyprint io ;
 IN: ttt.game
 
 TUPLE: game player-X player-O current-player board ui ;

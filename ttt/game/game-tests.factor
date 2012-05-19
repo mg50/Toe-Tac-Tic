@@ -87,3 +87,20 @@ IN: ttt.game.tests
 
     [ O ] [ game current-player>> marker>> ] unit-test
 ]
+
+
+! play-game-to-end
+[let
+    game new :> game
+
+    X { { 1 1 } { 0 0 } { 2 2 } } <mock-strategy> <player> :> px
+    O { { 0 1 } { 2 1 } } <mock-strategy> <player> :> po
+
+    game { { _ _ _ } { _ _ _ } { _ _ _ } } >>board
+    <console-ui> >>ui
+    px >>player-X
+    px >>current-player
+    po >>player-O drop
+
+!    [ { { X _ _ } { O X O } { _ _ X } } ] [ game play-game-to-end board>> ] output>store unit-test
+]
