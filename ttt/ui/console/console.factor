@@ -8,7 +8,7 @@ CONSTANT: move-request-message "Please enter your next move:"
 
 : <console-ui> ( -- c ) console-ui new ;
 
-M: console-ui print-message ( message ui -- ) drop print flush ;
+M: console-ui print-message ( message ui -- ) drop write flush ;
 
 : valid-move-string? ( string -- ? ) valid-move-regex matches? ;
 
@@ -40,5 +40,6 @@ M: console-ui prompt-move ( board ui -- x y )
 : whitespace? ( string -- ? ) R/ \s+/ matches? ;
 
 M:: console-ui prompt-options ( msg options ui -- idx )
-    msg ui print-message
+    msg " (options: " append options "/" join append "): " append
+    ui print-message
     f [ dup >boolean ] [ drop readln [ 1string whitespace? ] trim options index ] do until ;

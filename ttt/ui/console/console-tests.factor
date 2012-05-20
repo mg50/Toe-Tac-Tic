@@ -3,8 +3,8 @@ IN: ttt.ui.console.tests
 
 
 ! print-message
-[ "Hello\n" ] [ "Hello" <console-ui> print-message ] output>stack unit-test
-[ "Goodbye\n" ] [ "Goodbye" <console-ui> print-message ] output>stack unit-test
+[ "Hello" ] [ "Hello" <console-ui> print-message ] output>stack unit-test
+[ "Goodbye" ] [ "Goodbye" <console-ui> print-message ] output>stack unit-test
 
 ! valid-move-stringt?
 [ t ] [ "123 432" valid-move-string? ] unit-test
@@ -62,7 +62,7 @@ IN: ttt.ui.console.tests
 
 ! prompt-options
 [ 0 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "a\n" string>input output>store unit-test
-"Test message\n" assert-last-unit-test-output
+"Test message (options: a/b/c): " assert-last-unit-test-output
 
 [ 1 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "b\n" string>input output>store unit-test
 [ 2 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "c\n" string>input output>store unit-test
