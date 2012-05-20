@@ -18,7 +18,7 @@ IN: ttt.core.tests
 [ { { _ } } ] [ 1 <empty-board> ] unit-test
 [ { { _ _ } { _ _ } } ] [ 2 <empty-board> ] unit-test
 [ { { _ _ _ } { _ _ _ } { _ _ _ } } ] [ 3 <empty-board> ] unit-test
-
+[ f ] [ 2 <empty-board> 2array@ eq? ] unit-test
 
 [ _ ] [ 1 1 2 <empty-board> marker-at ] unit-test
 
@@ -54,7 +54,6 @@ IN: ttt.core.tests
     O 0 0 board (move!)
     0 0 board marker-at
 ] ] unit-test
-
 [let { { O _ } { _ O } } :> board
     [ t ] [ X 1 0 board (move!)
             O 0 1 board (move!)

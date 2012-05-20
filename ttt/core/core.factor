@@ -11,7 +11,7 @@ SYMBOL: _
 : 2array@ ( seq -- x y ) [ first ] [ second ] bi ;
 : 3array@ ( seq -- x y z ) [ first ] [ second ] [ third ] tri ;
 
-: <empty-board> ( size -- board ) dup _ <array> <array> ;
+: <empty-board> ( size -- board ) dup _ <array> <array> [ clone ] map ;
 
 : marker-at ( x y board -- marker ) nth nth ;
 : occupied? ( x y board -- ? ) marker-at _ eq? not ;
