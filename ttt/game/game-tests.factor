@@ -130,3 +130,19 @@ IN: ttt.game.tests
     [ human-strategy ] [ game player-X>> strategy>> class-of ] unit-test
     "Play against AI?\n" assert-last-unit-test-output
 ]
+
+! select-player
+[let
+    <console-ui> <game> :> game
+
+    [ human-strategy ] [ game select-player player-X>> strategy>> class-of ] "y" string>input output>store unit-test
+    [ f ] [ game player-O>> strategy>> ] unit-test
+    "Play as X?\n" assert-last-unit-test-output
+
+]
+[let
+    <console-ui> <game> :> game
+
+    [ human-strategy ] [ game select-player player-O>> strategy>> class-of ] "n" string>input output>store unit-test
+    [ f ] [ game player-X>> strategy>> ] unit-test
+]

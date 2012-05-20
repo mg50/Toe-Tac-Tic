@@ -40,3 +40,12 @@ TUPLE: game player-X player-O current-player board ui ;
         { [ dup 1 = ] [ drop [ human-strategy new >>strategy ] bi@ ] }
     } cond drop drop game
 ] ;
+
+:: select-player ( game -- game ) [let
+    game
+    "Play as X?" { "y" "n" } game ui>> prompt-options
+    {
+        { [ dup 0 = ] [ drop player-X>> ] }
+        { [ dup 1 = ] [ drop player-O>> ] }
+    } cond human-strategy new >>strategy drop game
+] ;
