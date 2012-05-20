@@ -1,4 +1,4 @@
-USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math ttt.strategy.mock ttt.player ttt.ui.console ttt.tools.test io prettyprint classes ttt.strategy.human ;
+USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math ttt.strategy.mock ttt.player ttt.ui.console ttt.tools.test io prettyprint classes ttt.strategy.human ttt.strategy.ai ;
 IN: ttt.game.tests
 
 ! other-player
@@ -114,22 +114,19 @@ IN: ttt.game.tests
 [ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "invalid\n4x4" string>input output>store unit-test
 
 
-! set-player-strategies
+! select-play-as
 [let
-    game new :> game
-    game player new >>player-X
-    player new >>player-O
-    [ { } <mock-strategy> ] set-player-strategies
+    <console-ui> <game> :> game
 
-    [ t ] [ game player-X>> strategy>> mock-strategy instance? ] unit-test
-    [ t ] [ game player-O>> strategy>> mock-strategy instance? ] unit-test
+    [ ai-strategy ] [ game select-play-vs-ai player-X>> strategy>> class-of ] "y" string>input output>store unit-test
+    [ ai-strategy ] [ game player-O>> strategy>> class-of ] unit-test
+    "Play against AI?\n" assert-last-unit-test-output
 ]
+! select-play-as
 [let
-    game new :> game
-    game player new >>player-X
-    player new >>player-O
-    [ human-strategy new ] set-player-strategies
+    <console-ui> <game> :> game
 
-    [ t ] [ game player-X>> strategy>> human-strategy instance? ] unit-test
-    [ t ] [ game player-O>> strategy>> human-strategy instance? ] unit-test
+    [ human-strategy ] [ game select-play-vs-ai player-X>> strategy>> class-of ] "n" string>input output>store unit-test
+    [ human-strategy ] [ game player-X>> strategy>> class-of ] unit-test
+    "Play against AI?\n" assert-last-unit-test-output
 ]

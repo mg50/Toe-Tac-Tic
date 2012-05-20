@@ -1,9 +1,9 @@
-USING: kernel accessors locals accessors combinators ttt.core ttt.player prettyprint io ttt.ui ;
+USING: kernel accessors locals accessors combinators ttt.core ttt.player prettyprint io ttt.ui ttt.strategy.ai ttt.strategy.human ;
 IN: ttt.game
 
 TUPLE: game player-X player-O current-player board ui ;
 
-: <game> ( ui -- g ) game new swap >>ui ;
+: <game> ( ui -- g ) game new swap >>ui X f <player> >>player-X O f <player> >>player-O ;
 
 
 : other-player ( game -- player ) {
@@ -29,6 +29,14 @@ TUPLE: game player-X player-O current-player board ui ;
         { [ dup 1 = ] [ drop 4 <empty-board> ] }
     } cond game swap >>board ;
 
-:: set-player-strategies ( game strat-ctor -- )
-    game [ player-X>> ] [ player-O>> ] bi
-    [ strat-ctor call >>strategy drop ] bi@ ; inline
+:: select-play-vs-ai ( game -- game ) [let
+    game ui>> :> ui
+
+    game player-X>>
+    game player-O>>
+    "Play against AI?" { "y" "n" } ui prompt-options
+    {
+        { [ dup 0 = ] [ drop [ ai-strategy new >>strategy ] bi@ ] }
+        { [ dup 1 = ] [ drop [ human-strategy new >>strategy ] bi@ ] }
+    } cond drop drop game
+] ;
