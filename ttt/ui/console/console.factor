@@ -39,7 +39,7 @@ M: console-ui prompt-move ( board ui -- x y )
 
 : whitespace? ( string -- ? ) R/ \s+/ matches? ;
 
-M:: console-ui prompt-options ( msg options ui -- idx )
-    msg " (options: " append options "/" join append "): " append
-    ui print-message
-    f [ dup >boolean ] [ drop readln [ 1string whitespace? ] trim options index ] do until ;
+M:: console-ui prompt-options ( msg options ui -- idx ) [let
+    msg " (options: " append options "/" join append "): " append :> prompt-message
+    f [ dup >boolean ] [ drop prompt-message ui print-message readln [ 1string whitespace? ] trim options index ] do until
+] ;
