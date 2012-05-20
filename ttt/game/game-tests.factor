@@ -146,3 +146,17 @@ IN: ttt.game.tests
     [ human-strategy ] [ game select-player player-O>> strategy>> class-of ] "n" string>input output>store unit-test
     [ f ] [ game player-X>> strategy>> ] unit-test
 ]
+
+! prompt-play-again
+[let
+    <console-ui> <game> :> game
+
+    game [ t ] curry [ game prompt-play-again ] "y" string>input output>store unit-test
+    "Play as X?\n" assert-last-unit-test-output
+
+]
+[let
+    <console-ui> <game> :> game
+
+    game [ f ] curry [ game prompt-play-again ] "n" string>input output>store unit-test
+]

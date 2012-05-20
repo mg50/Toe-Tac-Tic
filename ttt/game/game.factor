@@ -29,23 +29,25 @@ TUPLE: game player-X player-O current-player board ui ;
         { [ dup 1 = ] [ drop 4 <empty-board> ] }
     } cond game swap >>board ;
 
-:: select-play-vs-ai ( game -- game ? ) [let
-    game ui>> :> ui
-
+:: select-play-vs-ai ( game -- game ? )
     game player-X>>
     game player-O>>
-    "Play against AI?" { "y" "n" } ui prompt-options
+    "Play against AI?" { "y" "n" } game ui>> prompt-options
     {
         { [ dup 0 = ] [ drop [ ai-strategy new >>strategy drop ] bi@ t ] }
         { [ dup 1 = ] [ drop [ human-strategy new >>strategy drop ] bi@ f ] }
-    } cond game swap
-] ;
+    } cond game swap ;
 
-:: select-player ( game -- game ) [let
+:: select-player ( game -- game )
     game
     "Play as X?" { "y" "n" } game ui>> prompt-options
     {
         { [ dup 0 = ] [ drop player-X>> ] }
         { [ dup 1 = ] [ drop player-O>> ] }
-    } cond human-strategy new >>strategy drop game
-] ;
+    } cond human-strategy new >>strategy drop game ;
+
+:: prompt-play-again ( game -- game ? )
+    "Play as X?" { "y" "n" } game ui>> prompt-options {
+        { [ dup 0 = ] [ drop t ] }
+        { [ dup 1 = ] [ drop f ] }
+    } cond game swap ;
