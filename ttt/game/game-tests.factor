@@ -1,4 +1,4 @@
-USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math ttt.strategy.mock ttt.player ttt.ui.console ttt.tools.test io prettyprint ;
+USING: kernel ttt.game tools.test locals accessors vectors ttt.core  sequences math ttt.strategy.mock ttt.player ttt.ui.console ttt.tools.test io prettyprint classes ttt.strategy.human ;
 IN: ttt.game.tests
 
 ! other-player
@@ -112,3 +112,24 @@ IN: ttt.game.tests
 [ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "4x4" string>input output>store unit-test
 
 [ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "invalid\n4x4" string>input output>store unit-test
+
+
+! set-player-strategies
+[let
+    game new :> game
+    game player new >>player-X
+    player new >>player-O
+    [ { } <mock-strategy> ] set-player-strategies
+
+    [ t ] [ game player-X>> strategy>> mock-strategy instance? ] unit-test
+    [ t ] [ game player-O>> strategy>> mock-strategy instance? ] unit-test
+]
+[let
+    game new :> game
+    game player new >>player-X
+    player new >>player-O
+    [ human-strategy new ] set-player-strategies
+
+    [ t ] [ game player-X>> strategy>> human-strategy instance? ] unit-test
+    [ t ] [ game player-O>> strategy>> human-strategy instance? ] unit-test
+]

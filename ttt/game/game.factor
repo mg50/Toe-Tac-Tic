@@ -23,10 +23,12 @@ TUPLE: game player-X player-O current-player board ui ;
 
 : play-game-to-end ( game -- game ) [ full-turn ] do-until-game-over ;
 
-
-
 :: select-board-size ( game -- game ) "Select board size:" { "3x3" "4x4" }
     game ui>> prompt-options {
         { [ dup 0 = ] [ drop 3 <empty-board> ] }
         { [ dup 1 = ] [ drop 4 <empty-board> ] }
     } cond game swap >>board ;
+
+:: set-player-strategies ( game strat-ctor -- )
+    game [ player-X>> ] [ player-O>> ] bi
+    [ strat-ctor call >>strategy drop ] bi@ ; inline
