@@ -107,7 +107,7 @@ IN: ttt.game.tests
 
 ! select-board-size
 [ 3 ] [ game new <console-ui> >>ui select-board-size board>> length ] "3x3" string>input output>store unit-test
-"Select board size:\n" assert-last-unit-test-output
+"Select board size (options: 3x3/4x4): " assert-last-unit-test-output
 
 [ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "4x4" string>input output>store unit-test
 
@@ -120,7 +120,7 @@ IN: ttt.game.tests
 
     [ t ai-strategy ] [ game select-play-vs-ai swap player-X>> strategy>> class-of ] "y" string>input output>store unit-test
     [ ai-strategy ] [ game player-O>> strategy>> class-of ] unit-test
-    "Play against AI?\n" assert-last-unit-test-output
+    "Play against AI? (options: y/n): " assert-last-unit-test-output
 ]
 
 [let
@@ -128,7 +128,7 @@ IN: ttt.game.tests
 
     [ f human-strategy ] [ game select-play-vs-ai swap player-X>> strategy>> class-of ] "n" string>input output>store unit-test
     [ human-strategy ] [ game player-X>> strategy>> class-of ] unit-test
-    "Play against AI?\n" assert-last-unit-test-output
+    "Play against AI? (options: y/n): " assert-last-unit-test-output
 ]
 
 ! select-player
@@ -137,7 +137,7 @@ IN: ttt.game.tests
 
     [ human-strategy ] [ game select-player player-X>> strategy>> class-of ] "y" string>input output>store unit-test
     [ f ] [ game player-O>> strategy>> ] unit-test
-    "Play as X?\n" assert-last-unit-test-output
+    "Play as X? (options: y/n): " assert-last-unit-test-output
 
 ]
 [let
@@ -152,11 +152,38 @@ IN: ttt.game.tests
     <console-ui> <game> :> game
 
     game [ t ] curry [ game prompt-play-again ] "y" string>input output>store unit-test
-    "Play as X?\n" assert-last-unit-test-output
+    "Play again? (options: y/n): " assert-last-unit-test-output
 
 ]
 [let
     <console-ui> <game> :> game
 
     game [ f ] curry [ game prompt-play-again ] "n" string>input output>store unit-test
+]
+
+! win-message
+[let
+    game new :> game
+    game { { _ O _ } { X X X } { _ _ _ } } >>board drop
+    [ "Player X won!" ] [ game win-message ] unit-test
+]
+[let
+    game new :> game
+    game { { _ O _ } { X X X } { _ _ _ } } >>board drop
+    [ "Player X won!" ] [ game win-message ] unit-test
+]
+[let
+    game new :> game
+    game { { _ X O } { _ X O } { _ _ O } } >>board drop
+    [ "Player O won!" ] [ game win-message ] unit-test
+]
+[let
+    game new :> game
+    game { { _ O _ } { X _ X } { _ _ _ } } >>board drop
+    [ "The game ended in a draw!" ] [ game win-message ] unit-test
+]
+[let
+    game new :> game
+    game { { O X O } { X O X } { X O X } } >>board drop
+    [ "The game ended in a draw!" ] [ game win-message ] unit-test
 ]
