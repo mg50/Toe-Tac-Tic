@@ -8,7 +8,7 @@ CONSTANT: move-request-message "Please enter your next move:"
 
 : <console-ui> ( -- c ) console-ui new ;
 
-M: console-ui print-message ( message ui -- ) drop print ;
+M: console-ui print-message ( message ui -- ) drop print flush ;
 
 : valid-move-string? ( string -- ? ) valid-move-regex matches? ;
 
