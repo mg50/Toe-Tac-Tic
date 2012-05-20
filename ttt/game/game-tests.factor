@@ -114,19 +114,19 @@ IN: ttt.game.tests
 [ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "invalid\n4x4" string>input output>store unit-test
 
 
-! select-play-as
+! select-play-vs-ai
 [let
     <console-ui> <game> :> game
 
-    [ ai-strategy ] [ game select-play-vs-ai player-X>> strategy>> class-of ] "y" string>input output>store unit-test
+    [ t ai-strategy ] [ game select-play-vs-ai swap player-X>> strategy>> class-of ] "y" string>input output>store unit-test
     [ ai-strategy ] [ game player-O>> strategy>> class-of ] unit-test
     "Play against AI?\n" assert-last-unit-test-output
 ]
-! select-play-as
+
 [let
     <console-ui> <game> :> game
 
-    [ human-strategy ] [ game select-play-vs-ai player-X>> strategy>> class-of ] "n" string>input output>store unit-test
+    [ f human-strategy ] [ game select-play-vs-ai swap player-X>> strategy>> class-of ] "n" string>input output>store unit-test
     [ human-strategy ] [ game player-X>> strategy>> class-of ] unit-test
     "Play against AI?\n" assert-last-unit-test-output
 ]
