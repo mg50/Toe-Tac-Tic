@@ -1,4 +1,4 @@
-USING: kernel ttt.ui io math.parser regexp sequences ttt.core namespaces arrays locals ;
+USING: kernel ttt.ui io math.parser regexp sequences ttt.core namespaces arrays locals sequences strings ;
 IN: ttt.ui.console
 
 TUPLE: console-ui < ui ;
@@ -35,3 +35,9 @@ M: console-ui update-display ( board ui -- ) drop display-board "\n" append prin
 
 M: console-ui prompt-move ( board ui -- x y )
     move-request-message swap print-message (prompt-move-until-available) ;
+
+: whitespace? ( string -- ? ) R/ \s+/ matches? ;
+
+M:: console-ui prompt-options ( msg options ui -- idx )
+    msg ui print-message
+    f [ dup >boolean ] [ drop readln [ 1string whitespace? ] trim options index ] do until ;

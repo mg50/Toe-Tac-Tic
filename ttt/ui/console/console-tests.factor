@@ -52,3 +52,20 @@ IN: ttt.ui.console.tests
 [ 1 0 ] [ { { O _ } { _ _ } } (prompt-move-until-available) ] "1 0" string>input unit-test
 [ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "0 0\n1 0" string>input unit-test
 [ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "33 11\n1 0" string>input unit-test
+
+! whitespace?
+[ t ] [ "  " whitespace? ] unit-test
+[ t ] [ "\n" whitespace? ] unit-test
+[ t ] [ "    \n " whitespace? ] unit-test
+[ f ] [ "a" whitespace? ] unit-test
+[ f ] [ " a" whitespace? ] unit-test
+
+! prompt-options
+[ 0 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "a\n" string>input output>store unit-test
+"Test message\n" assert-last-unit-test-output
+
+[ 1 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "b\n" string>input output>store unit-test
+[ 2 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "c\n" string>input output>store unit-test
+
+[ 0 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "blah\na\n" string>input output>store unit-test
+[ 2 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "blah\nc\n" string>input output>store unit-test
