@@ -104,3 +104,11 @@ IN: ttt.game.tests
 
     [ { { X _ _ } { O X O } { _ _ X } } ] [ game play-game-to-end board>> ] output>store unit-test
 ]
+
+! select-board-size
+[ 3 ] [ game new <console-ui> >>ui select-board-size board>> length ] "3x3" string>input output>store unit-test
+"Select board size:\n" assert-last-unit-test-output
+
+[ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "4x4" string>input output>store unit-test
+
+[ 4 ] [ game new <console-ui> >>ui select-board-size board>> length ] "invalid\n4x4" string>input output>store unit-test
