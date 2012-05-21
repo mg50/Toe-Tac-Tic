@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy.ai ttt.core tools.test locals sets sequences arrays math ;
+USING: kernel ttt.strategy.ai ttt.core tools.test locals sets sequences arrays math ttt.strategy ;
 IN: ttt.strategy.ai.tests
 
 ! Asserts that the results of calling the two quotations contain the same members
@@ -120,3 +120,14 @@ IN: ttt.strategy.ai.tests
 [ 3 ] [ { 1 3 2 3 1 3 } [ ] [ supremum ] champion ] unit-test
 [ 1 ] [ { 1 2 3 } [ -1 * ] [ supremum ] champion ] unit-test
 [ { } [ ] [ supremum ] champion ] must-fail
+
+! get-next-move
+[let
+    ai-strategy new :> strat
+
+    [ 0 0 ] [ X { { _ X } { _ _ } } f strat get-next-move ] unit-test
+    [ 0 0 ] [ O { { _ O } { _ _ } } f strat get-next-move ] unit-test
+
+    [ 2 2 ] [ X { { X O O } { O X _ } { _ _ _ } } f strat get-next-move ] unit-test
+    [ 1 1 ] [ O { { X _ _ } { _ _ _ } { _ _ _ } } f strat get-next-move ] unit-test
+]

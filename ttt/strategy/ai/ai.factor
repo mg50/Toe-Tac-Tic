@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io ;
+USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint ;
 IN: ttt.strategy.ai
 
 TUPLE: ai-strategy < strategy coords ;
@@ -64,3 +64,16 @@ CONSTANT: -infinity -1
 ! takes a sequence of elements and returns the element whose image under a specified function satisfies some criterion over the whole space of images
 :: champion ( seq fitness-fn: ( el -- n ) selector: ( seq -- el ) -- el )
     seq fitness-fn map dup selector call swap index seq nth ; inline
+
+M:: ai-strategy get-next-move ( marker board ui strategy -- x y ) [let
+    board empty-coords :> empty-coords
+    empty-coords length :> depth
+    marker other-marker :> other-marker
+
+    empty-coords [
+        marker swap 2array@ board (move) :> child-board
+        child-board depth 1 - -infinity infinity other-marker ab-pruning-score
+    ]
+    [ marker X = [ supremum ] [ infimum ] if ]
+    champion 2array@
+] ;
