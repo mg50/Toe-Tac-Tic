@@ -1,6 +1,6 @@
 USING: accessors ;
 IN: ttt.strategy
 
-TUPLE: strategy marker ;
+TUPLE: strategy ;
 
-GENERIC: get-next-move ( board ui strategy -- )
+GENERIC: get-next-move ( marker board ui strategy -- x y )
