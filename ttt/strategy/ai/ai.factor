@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint namespaces ;
+USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint namespaces assocs ;
 IN: ttt.strategy.ai
 
 TUPLE: ai-strategy < strategy coords ;
@@ -6,10 +6,10 @@ TUPLE: ai-strategy < strategy coords ;
 CONSTANT: infinity 1
 CONSTANT: -infinity -1
 
-CONSTANT: X-hash H{ }
-CONSTANT: O-hash H{ }
+CONSTANT: X-cache H{ }
+CONSTANT: O-cache H{ }
 
-: hash-for-marker ( marker -- hash ) X = [ X-hash ] [ O-hash ] if ;
+: cache-for-marker ( marker -- cache ) X = [ X-cache ] [ O-cache ] if ;
 
 "X" X set
 "O" O set
@@ -54,12 +54,19 @@ CONSTANT: O-hash H{ }
 
 :: ab-pruning-score ( board depth a b marker -- n ) [let
     board leaf-score :> leaf-score
+    board board-hash :> board-hash
+    marker cache-for-marker :> marker-cache
+    f :> score!
 
-    depth 0 = leaf-score 0 = not or
-    [ leaf-score ]
-    [ board depth a b marker [ ab-pruning-score ] call-on-children-while-b>a  ]
-    if
+    {
+        { [ depth 0 = leaf-score 0 = not or ] [ leaf-score ] }
+        { [ board-hash marker-cache at dup score! ] [ score ] }
+        [ board depth a b marker [ ab-pruning-score ] call-on-children-while-b>a
+          dup score!
+          dup board-hash marker-cache set-at ]
+    } cond
 ] ;
+
 
 ! takes a sequence of elements and returns the element whose image under a specified function satisfies some criterion over the whole space of images
 :: champion ( seq fitness-fn: ( el -- n ) selector: ( seq -- el ) -- el )

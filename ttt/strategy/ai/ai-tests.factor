@@ -5,9 +5,9 @@ IN: ttt.strategy.ai.tests
 : unit-test-same-members ( quot1 quot2 -- ) [ [ call ] bi@ set= ] 2curry [ t ] swap unit-test ;
 
 
-! hash-for-marker
-X-hash [ ] curry [ X hash-for-marker ] unit-test
-O-hash [ ] curry [ O hash-for-marker ] unit-test
+! cache-for-marker
+X-cache [ ] curry [ X cache-for-marker ] unit-test
+O-cache [ ] curry [ O cache-for-marker ] unit-test
 
 ! board-hash
 [ "X" ] [ { { X } } board-hash ] unit-test
