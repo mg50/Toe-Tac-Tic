@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors ;
+USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io ;
 IN: ttt.strategy.ai
 
 TUPLE: ai-strategy < strategy coords ;
@@ -19,3 +19,34 @@ CONSTANT: -infinity -1
 
 ! : child-nodes ( board -- seq ) [ ] map-each-coord sift ;
 :: child-nodes ( marker board -- seq ) board [| x y b | marker x y b try-move ] map-each-coord sift ;
+
+! :: ab-prune-score ( board depth a b marker -- n )
+!    board leaf-score :> leaf-score
+!    depth 0 = leaf-score 0 = or [
+!        leaf-score
+!    ] [
+!        child depth 1 - a b marker other-marker ab-prune-score :> child-score
+!
+!    ] if
+!    ;
+
+:: for-while ( seq condition: ( -- ? ) body: ( el -- x ) -- x ) [let
+    0 :> idx!
+    f [ idx seq length < condition call and ] [ drop idx seq nth
+                                                idx 1 + idx!
+                                                body call ] while
+] ; inline
+
+:: call-on-children-while-b>a ( board depth a b marker fn: ( board depth a b marker -- n ) -- score ) [let
+    a :> a!
+    b :> b!
+
+    marker board child-nodes [ b a > ]
+    [
+        depth 1 - a b marker other-marker fn call
+        marker X =
+        [ dup a > [ a! ] [ drop ] if a ]
+        [ dup b < [ b! ] [ drop ] if b ]
+        if
+    ] for-while
+] ; inline

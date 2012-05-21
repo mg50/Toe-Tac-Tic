@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy.ai ttt.core tools.test locals sets sequences arrays ;
+USING: kernel ttt.strategy.ai ttt.core tools.test locals sets sequences arrays math ;
 IN: ttt.strategy.ai.tests
 
 ! Asserts that the results of calling the two quotations contain the same members
@@ -42,4 +42,58 @@ IN: ttt.strategy.ai.tests
         { { X X O } { O O _ } { O _ X } }
         { { X X O } { O O _ } { _ O X } } } ]
     [ O board child-nodes ] unit-test-same-members
+]
+
+
+! for-while
+[let
+    0 :> a!
+    [ 2 ] [ { 0 1 2 3 4 } [ a 3 < ] [ a 1 + a! ] for-while ] unit-test
+]
+[let
+    0 :> a!
+    [ "c" ] [ { "a" "b" "c" "d" "e" } [ a 3 < ] [ a 1 + a! ] for-while ] unit-test
+]
+[let
+    0 :> a!
+    [ 4 ] [ { 0 1 2 3 4 } [ a 5 < ] [ a 1 + a! ] for-while ] unit-test
+]
+[let
+    0 :> a!
+    [ 4 ] [ { 0 1 2 3 4 } [ a 10 < ] [ a 1 + a! ] for-while ] unit-test
+]
+[let
+    0 :> a!
+    [ f ] [ { 0 1 2 3 4 } [ a 0 < ] [ a 1 + a! ] for-while ] unit-test
+]
+[let
+    0 :> a!
+    [ f ] [ { } [ a 5 < ] [ a 1 + a! ] for-while ] unit-test
+]
+
+! call-on-children-while-b>a
+[let
+    { { O O } { X _ } } :> board
+    [| board depth a b marker | a 2 / ] :> fn
+    [ -1/2 ] [ board 1 -1 1 X fn call-on-children-while-b>a ] unit-test
+]
+[let
+    { { O O } { X _ } } :> board
+    [| board depth a b marker | b 2 / ] :> fn
+    [ 1/2 ] [ board 1 -1 1 O fn call-on-children-while-b>a ] unit-test
+]
+[let
+    { { O O } { _ _ } } :> board
+    [| board depth a b marker | a 2 / ] :> fn
+    [ -1/4 ] [ board 1 -1 1 X fn call-on-children-while-b>a ] unit-test
+]
+[let
+    { { O O } { _ _ } } :> board
+    [| board depth a b marker | b 2 / ] :> fn
+    [ 1/4 ] [ board 1 -1 1 O fn call-on-children-while-b>a ] unit-test
+]
+[let
+    { { O O } { _ _ } } :> board
+    [| board depth a b marker | a 2 / ] :> fn
+    [ -1/2 ] [ board 1 -1 -1/2 X fn call-on-children-while-b>a ] unit-test
 ]
