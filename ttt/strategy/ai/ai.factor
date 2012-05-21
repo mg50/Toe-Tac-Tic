@@ -60,3 +60,7 @@ CONSTANT: -infinity -1
     [ board depth a b marker [ ab-pruning-score ] call-on-children-while-b>a  ]
     if
 ] ;
+
+! takes a sequence of elements and returns the element whose image under a specified function satisfies some criterion over the whole space of images
+:: champion ( seq fitness-fn: ( el -- n ) selector: ( seq -- el ) -- el )
+    seq fitness-fn map dup selector call swap index seq nth ; inline

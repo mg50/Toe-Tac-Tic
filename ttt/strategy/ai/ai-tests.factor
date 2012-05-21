@@ -113,3 +113,10 @@ IN: ttt.strategy.ai.tests
 [ 0 ] [ { { X O X } { X X O } { O X O } } 0 -1 1 O ab-pruning-score ] unit-test
 [ 1 ] [ { { X X _ } { X O O } { _ _ _ } } 4 -1 1 O ab-pruning-score ] unit-test
 [ 1 ] [ { { X O _ } { _ _ _ } { _ _ _ } } 7 -1 1 X ab-pruning-score ] unit-test
+
+! champion
+[ 3 ] [ { 1 2 3 } [ ] [ supremum ] champion ] unit-test
+[ 1 ] [ { 1 2 3 } [ ] [ infimum ] champion ] unit-test
+[ 3 ] [ { 1 3 2 3 1 3 } [ ] [ supremum ] champion ] unit-test
+[ 1 ] [ { 1 2 3 } [ -1 * ] [ supremum ] champion ] unit-test
+[ { } [ ] [ supremum ] champion ] must-fail
