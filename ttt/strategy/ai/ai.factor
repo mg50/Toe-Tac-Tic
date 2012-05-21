@@ -1,10 +1,21 @@
-USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint ;
+USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint namespaces ;
 IN: ttt.strategy.ai
 
 TUPLE: ai-strategy < strategy coords ;
 
 CONSTANT: infinity 1
 CONSTANT: -infinity -1
+
+CONSTANT: X-hash H{ }
+CONSTANT: O-hash H{ }
+
+: hash-for-marker ( marker -- hash ) X = [ X-hash ] [ O-hash ] if ;
+
+"X" X set
+"O" O set
+" " _ set
+
+: board-hash ( board -- string ) [ [ get ] map "" join ] map "" join ;
 
 : coords ( board -- seq ) length [0,b) dup cartesian-product concat ; inline
 : empty-coords ( board -- seq ) dup coords [ dupd swap [ 2array@ ] dip occupied? not  ] filter swap drop ;

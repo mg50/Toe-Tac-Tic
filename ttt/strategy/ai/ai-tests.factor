@@ -5,6 +5,15 @@ IN: ttt.strategy.ai.tests
 : unit-test-same-members ( quot1 quot2 -- ) [ [ call ] bi@ set= ] 2curry [ t ] swap unit-test ;
 
 
+! hash-for-marker
+X-hash [ ] curry [ X hash-for-marker ] unit-test
+O-hash [ ] curry [ O hash-for-marker ] unit-test
+
+! board-hash
+[ "X" ] [ { { X } } board-hash ] unit-test
+[ "XOXX" ] [ { { X O } { X X } } board-hash ] unit-test
+[ "  OX X OO" ] [ { { _ _ O } { X _ X } { _ O O } } board-hash ] unit-test
+
 ! coords
 [ { { 0 1 } { 1 0 } { 1 1 } { 0 0 } } ] [ { { } { } } coords ] unit-test-same-members
 [ 9 ] [ { { } { } { } } coords length ] unit-test
