@@ -7,6 +7,7 @@ CONSTANT: infinity 1
 CONSTANT: -infinity -1
 
 : coords ( board -- seq ) length [0,b) dup cartesian-product concat ; inline
+: empty-coords ( board -- seq ) dup coords [ dupd swap [ 2array@ ] dip occupied? not  ] filter swap drop ;
 
 :: map-each-coord ( board quot -- seq )
     board coords [ 2array@ board quot call ] map ; inline

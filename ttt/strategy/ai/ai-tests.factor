@@ -9,6 +9,12 @@ IN: ttt.strategy.ai.tests
 [ { { 0 1 } { 1 0 } { 1 1 } { 0 0 } } ] [ { { } { } } coords ] unit-test-same-members
 [ 9 ] [ { { } { } { } } coords length ] unit-test
 
+! empty-coords
+[ { { 0 0 } } ] [ { { _ X } { X X } } empty-coords ] unit-test
+[ { { 0 0 } { 1 1 } } ] [ { { _ X } { X _ } } empty-coords ] unit-test
+[ { { 0 0 } { 1 1 } } ] [ { { _ O } { O _ } } empty-coords ] unit-test
+[ { } ] [ { { X X } { X X } } empty-coords ] unit-test
+
 ! with-each-coord
 [let { { X O } { _ _ } } :> board
     [ { { 0 0 X } { 1 0 O } { 0 1 _ } { 1 1 _ } } ]
