@@ -139,4 +139,5 @@ O-cache [ ] curry [ O cache-for-marker ] unit-test
 
     [ 2 2 ] [ X { { X O O } { O X _ } { _ _ _ } } f strat get-next-move ] unit-test
     [ 1 1 ] [ O { { X _ _ } { _ _ _ } { _ _ _ } } f strat get-next-move ] unit-test
+    [ 1 0 ] [ X { { X _ _ } { O _ _ } { _ _ _ } } f strat get-next-move ] unit-test
 ]
