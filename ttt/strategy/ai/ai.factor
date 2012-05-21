@@ -18,18 +18,7 @@ CONSTANT: -infinity -1
     [ drop 0 ]
 } cond ;
 
-! : child-nodes ( board -- seq ) [ ] map-each-coord sift ;
 :: child-nodes ( marker board -- seq ) board [| x y b | marker x y b try-move ] map-each-coord sift ;
-
-! :: ab-prune-score ( board depth a b marker -- n )
-!    board leaf-score :> leaf-score
-!    depth 0 = leaf-score 0 = or [
-!        leaf-score
-!    ] [
-!        child depth 1 - a b marker other-marker ab-prune-score :> child-score
-!
-!    ] if
-!    ;
 
 :: for-while ( seq condition: ( -- ? ) body: ( el -- x ) -- x ) [let
     0 :> idx!
