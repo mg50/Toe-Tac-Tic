@@ -50,3 +50,12 @@ CONSTANT: -infinity -1
         if
     ] for-while
 ] ; inline
+
+:: ab-pruning-score ( board depth a b marker -- n ) [let
+    board leaf-score :> leaf-score
+
+    depth 0 = leaf-score 0 = not or
+    [ leaf-score ]
+    [ board depth a b marker [ ab-pruning-score ] call-on-children-while-b>a  ]
+    if
+] ;

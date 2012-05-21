@@ -97,3 +97,13 @@ IN: ttt.strategy.ai.tests
     [| board depth a b marker | a 2 / ] :> fn
     [ -1/2 ] [ board 1 -1 -1/2 X fn call-on-children-while-b>a ] unit-test
 ]
+
+! ab-pruning-score
+[ 1 ] [ { { X X _ } { _ _ _ } { _ _ _ } } 7 -1 1 X ab-pruning-score ] unit-test
+[ -1 ] [ { { O O _ } { _ _ _ } { _ _ _ } } 7 -1 1 O ab-pruning-score ] unit-test
+[ 1 ] [ { { X O X } { X X X } { O X O } } 0 -1 1 X ab-pruning-score ] unit-test
+[ -1 ] [ { { X O X } { X X O } { O O O } } 0 -1 1 X ab-pruning-score ] unit-test
+[ 0 ] [ { { X O X } { X X O } { O X O } } 0 -1 1 X ab-pruning-score ] unit-test
+[ 0 ] [ { { X O X } { X X O } { O X O } } 0 -1 1 O ab-pruning-score ] unit-test
+[ 1 ] [ { { X X _ } { X O O } { _ _ _ } } 4 -1 1 O ab-pruning-score ] unit-test
+[ 1 ] [ { { X O _ } { _ _ _ } { _ _ _ } } 7 -1 1 X ab-pruning-score ] unit-test
