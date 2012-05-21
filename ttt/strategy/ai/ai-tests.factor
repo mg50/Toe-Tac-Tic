@@ -9,6 +9,11 @@ IN: ttt.strategy.ai.tests
 X-cache [ ] curry [ X cache-for-marker ] unit-test
 O-cache [ ] curry [ O cache-for-marker ] unit-test
 
+! marker-value
+[ "X" ] [ X marker-value ] unit-test
+[ "O" ] [ O marker-value ] unit-test
+[ " " ] [ _ marker-value ] unit-test
+
 ! board-hash
 [ "X" ] [ { { X } } board-hash ] unit-test
 [ "XOXX" ] [ { { X O } { X X } } board-hash ] unit-test

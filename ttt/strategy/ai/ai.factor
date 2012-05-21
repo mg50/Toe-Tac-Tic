@@ -1,4 +1,4 @@
-USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint namespaces assocs ;
+USING: kernel ttt.strategy ttt.core combinators locals math.ranges sequences accessors math io prettyprint namespaces assocs math.parser ;
 IN: ttt.strategy.ai
 
 TUPLE: ai-strategy < strategy coords ;
@@ -11,11 +11,13 @@ CONSTANT: O-cache H{ }
 
 : cache-for-marker ( marker -- cache ) X = [ X-cache ] [ O-cache ] if ;
 
-"X" X set
-"O" O set
-" " _ set
+: marker-value ( marker -- string ) {
+    { [ dup X = ] [ drop "X" ] }
+    { [ dup O = ] [ drop "O" ] }
+    { [ dup _ = ] [ drop " " ] }
+} cond ;
 
-: board-hash ( board -- string ) [ [ get ] map "" join ] map "" join ;
+: board-hash ( board -- string ) [ [ marker-value ] map "" join ] map "" join ;
 
 : coords ( board -- seq ) length [0,b) dup cartesian-product concat ; inline
 : empty-coords ( board -- seq ) dup coords [ dupd swap [ 2array@ ] dip occupied? not  ] filter swap drop ;
