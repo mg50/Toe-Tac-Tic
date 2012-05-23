@@ -17,13 +17,13 @@ M: console-ui print-message ( message ui -- ) drop write flush ;
     [ string parse-move-string board available? ] [ f ] if ;
 
 : display-marker ( marker -- string ) {
-    { [ dup X = ] [ drop "X" ] }
-    { [ dup O = ] [ drop "O" ] }
-    { [ dup _ = ] [ drop " " ] }
+    { [ dup X = ] [ drop " X " ] }
+    { [ dup O = ] [ drop " O " ] }
+    { [ dup _ = ] [ drop "   " ] }
 } cond ;
 
 : display-column ( coll -- string ) [ display-marker ] map "|" join ;
-: make-separator ( seq -- string ) length 2 * 1 - "-" <array> "" join "\n" prepend "\n" append ;
+: make-separator ( seq -- string ) length dup 3 * + 1 - "-" <array> "" join "\n" prepend "\n" append ;
 : display-board ( board -- string ) [ display-column ] map dup make-separator join ;
 M: console-ui update-display ( board ui -- ) drop display-board "\n" append print ;
 

@@ -29,26 +29,26 @@ IN: ttt.ui.console.tests
 ]
 
 ! display-marker
-[ "X" ] [ X display-marker ] unit-test
-[ "O" ] [ O display-marker ] unit-test
-[ " " ] [ _ display-marker ] unit-test
+[ " X " ] [ X display-marker ] unit-test
+[ " O " ] [ O display-marker ] unit-test
+[ "   " ] [ _ display-marker ] unit-test
 
 ! display-column
-[ "X|X|X" ] [ { X X X } display-column ] unit-test
-[ "O| |X" ] [ { O _ X } display-column ] unit-test
+[ " X | X | X " ] [ { X X X } display-column ] unit-test
+[ " O |   | X " ] [ { O _ X } display-column ] unit-test
 
 ! make-separator
-[ "\n-----\n" ] [ { 1 2 3 } make-separator ] unit-test
-[ "\n-------\n" ] [ { { } { } { } { } } make-separator ] unit-test
+[ "\n-----------\n" ] [ { 1 2 3 } make-separator ] unit-test
+[ "\n---------------\n" ] [ { { } { } { } { } } make-separator ] unit-test
 
 ! display-board
-[ "X|O\n---\n |O" ] [ { { X O } { _ O } } display-board ] unit-test
-[ "X|X|X\n-----\nO| | \n-----\nO|O|O" ] [ { { X X X } { O _ _ } { O O O } } display-board ] unit-test
+[ " X | O \n-------\n   | O " ] [ { { X O } { _ O } } display-board ] unit-test
+[ " X | X | X \n-----------\n O |   |   \n-----------\n O | O | O " ] [ { { X X X } { O _ _ } { O O O } } display-board ] unit-test
 
 ! update-display method
 [let <console-ui> :> ui
-    [ "X|O\n---\n |O\n\n" ] [ { { X O } { _ O } } ui update-display ] output>stack unit-test
-    [ "X|X|X\n-----\nO| | \n-----\nO|O|O\n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] output>stack unit-test
+    [ " X | O \n-------\n   | O \n\n" ] [ { { X O } { _ O } } ui update-display ] output>stack unit-test
+    [ " X | X | X \n-----------\n O |   |   \n-----------\n O | O | O \n\n" ] [ { { X X X } { O _ _ } { O O O } } ui update-display ] output>stack unit-test
 ]
 
 ! (prompt-move-until-valid)
