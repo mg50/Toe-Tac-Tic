@@ -1,5 +1,5 @@
 USING: ttt.ui.console ttt.game kernel ;
-IN: ttt.main
+IN: ttt
 
 : start ( -- ) <console-ui> run-game drop ;
 
