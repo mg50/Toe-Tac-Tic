@@ -165,25 +165,25 @@ IN: ttt.game.tests
 [let
     game new :> game
     game { { _ O _ } { X X X } { _ _ _ } } >>board drop
-    [ "Player X won!" ] [ game win-message ] unit-test
+    [ "Player X won!\n" ] [ game win-message ] unit-test
 ]
 [let
     game new :> game
     game { { _ O _ } { X X X } { _ _ _ } } >>board drop
-    [ "Player X won!" ] [ game win-message ] unit-test
+    [ "Player X won!\n" ] [ game win-message ] unit-test
 ]
 [let
     game new :> game
     game { { _ X O } { _ X O } { _ _ O } } >>board drop
-    [ "Player O won!" ] [ game win-message ] unit-test
+    [ "Player O won!\n" ] [ game win-message ] unit-test
 ]
 [let
     game new :> game
     game { { _ O _ } { X _ X } { _ _ _ } } >>board drop
-    [ "The game ended in a draw!" ] [ game win-message ] unit-test
+    [ "The game ended in a draw!\n" ] [ game win-message ] unit-test
 ]
 [let
     game new :> game
     game { { O X O } { X O X } { X O X } } >>board drop
-    [ "The game ended in a draw!" ] [ game win-message ] unit-test
+    [ "The game ended in a draw!\n" ] [ game win-message ] unit-test
 ]
