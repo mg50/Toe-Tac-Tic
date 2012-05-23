@@ -66,4 +66,6 @@ TUPLE: game player-X player-O current-player board ui ;
 : run-game ( ui -- game ) <game>
     [ prompt-play-again ]
     [ select-board-size select-play-vs-ai [ select-player ] when
-      set-current-player-to-X play-game-to-end finish ] do while ;
+      set-current-player-to-X
+      dup ui>> before-game-start
+      play-game-to-end finish ] do while ;

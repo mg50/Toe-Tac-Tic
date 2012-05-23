@@ -41,3 +41,6 @@ M:: console-ui prompt-options ( msg options ui -- idx ) [let
     msg " (options: " append options "/" join append "): " append :> prompt-message
     f [ dup >boolean ] [ drop prompt-message ui print-message readln [ 1string whitespace? ] trim options index ] do until
 ] ;
+
+CONSTANT: instructions "Enter the coordinates of the move you'd like to play. For instance, enter \"0 0 \" to play the top-left cell.\n\n"
+M: console-ui before-game-start ( ui -- ) instructions swap print-message ;
