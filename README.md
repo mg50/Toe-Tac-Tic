@@ -12,8 +12,4 @@ To run the tests, enter:
 
 `${YOUR-PATH-TO-FACTOR}/factor -run=ttt -test`
 
-You will need the development version of Factor to run all of the project tests correctly; the stable version is missing some necessary functions. Note that there will be a lot of output from the unit tests, so you may want to store it in another file:
-
-`${YOUR-PATH-TO-FACTOR}/factor -run=ttt > /tmp/factortests`
-
-`vi /tmp/factortests`
+You will need the development version of Factor to run all of the project tests correctly; the stable version is missing some necessary functions.
