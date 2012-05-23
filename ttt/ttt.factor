@@ -1,6 +1,6 @@
-USING: ttt.ui.console ttt.game kernel ;
+USING: ttt.ui.console ttt.game kernel namespaces tools.test ;
 IN: ttt
 
-: start ( -- ) <console-ui> run-game drop ;
+: start ( -- ) "test" get-global [ "ttt" test ] [ <console-ui> run-game drop ] if ;
 
 MAIN: start
