@@ -2,7 +2,7 @@ A version of Tic-Tac-Toe implemented in Factor.
 
 After installing Factor from the [website](http://factorcode.org/), symlink the `ttt` directory in this repository as follows:
 
-`ln -s ./ttt ${YOUR-PATH-TO-FACTOR}/work/ttt`
+`ln -s $(pwd) ${YOUR-PATH-TO-FACTOR}/work/ttt`
 
 After doing this, you can run TTT by entering:
 
