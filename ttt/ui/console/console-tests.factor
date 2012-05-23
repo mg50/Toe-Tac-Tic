@@ -1,4 +1,4 @@
-USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core locals ttt.tools.test ;
+USING: kernel ttt.ui ttt.ui.console tools.test io.streams.string arrays ttt.core locals ttt.tools.test sequences ;
 IN: ttt.ui.console.tests
 
 
@@ -6,15 +6,27 @@ IN: ttt.ui.console.tests
 [ "Hello" ] [ "Hello" <console-ui> print-message ] output>stack unit-test
 [ "Goodbye" ] [ "Goodbye" <console-ui> print-message ] output>stack unit-test
 
-! valid-move-stringt?
-[ t ] [ "123 432" valid-move-string? ] unit-test
-[ f ] [ "123 321 123" valid-move-string? ] unit-test
-[ f ] [ "123" valid-move-string? ] unit-test
-[ f ] [ "1 one" valid-move-string? ] unit-test
-
 ! parse-move-string
 [ { 1 2 } ] [ "1 2" parse-move-string 2array ] unit-test
 [ { 3 4 } ] [ "3 4" parse-move-string 2array ] unit-test
+
+! valid-move-string?
+[let { { _ _ } { _ _ } } :> board
+    [ t ] [ "0 0" board valid-move-string? ] unit-test
+    [ t ] [ "1 0" board valid-move-string? ] unit-test
+    [ f ] [ "123 432" board valid-move-string? ] unit-test
+    [ f ] [ "123 321 123" board valid-move-string? ] unit-test
+    [ f ] [ "123" board valid-move-string? ] unit-test
+    [ f ] [ "1 one" board valid-move-string? ] unit-test
+]
+[let { { X _ } { _ O } } :> board
+    [ f ] [ "123 432" board valid-move-string? ] unit-test
+    [ f ] [ "0 0" board valid-move-string? ] unit-test
+    [ t ] [ "1 0" board valid-move-string? ] unit-test
+    [ t ] [ "0 1" board valid-move-string? ] unit-test
+    [ f ] [ "1 1" board valid-move-string? ] unit-test
+    [ f ] [ "-1 1" board valid-move-string? ] unit-test
+]
 
 ! display-marker
 [ "X" ] [ X display-marker ] unit-test
@@ -40,18 +52,29 @@ IN: ttt.ui.console.tests
 ]
 
 ! (prompt-move-until-valid)
-[ 1 2 ] [ (prompt-move-until-valid) ] "1 2" string>input unit-test
-[ 1 2 ] [ (prompt-move-until-valid) ] "1 2    \n\n" string>input unit-test
-[ 3 5 ] [ (prompt-move-until-valid) ] "3 5" string>input unit-test
-[ 1 2 ] [ (prompt-move-until-valid) ] "test\n1 2" string>input unit-test
-[ 5 2 ] [ (prompt-move-until-valid) ] "5\n5 2" string>input unit-test
+[let
+    { { X _ } { _ O } } :> board
+    <console-ui> :> ui
 
-! (prompt-move-until-available)
-[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "0 0" string>input unit-test
-[ 0 0 ] [ { { _ } } (prompt-move-until-available) ] "1 2\n0 0" string>input unit-test
-[ 1 0 ] [ { { O _ } { _ _ } } (prompt-move-until-available) ] "1 0" string>input unit-test
-[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "0 0\n1 0" string>input unit-test
-[ 1 0 ] [ { { X _ } { _ _ } } (prompt-move-until-available) ] "33 11\n1 0" string>input unit-test
+    [ 0 1 ] [ board ui (prompt-move-until-valid) ] "0 1" string>input output>store unit-test
+    move-request-message assert-last-unit-test-output
+
+    [ 1 0 ] [ board ui (prompt-move-until-valid) ] "1 0" string>input output>store unit-test
+    move-request-message assert-last-unit-test-output
+
+    [ 0 1 ] [ board ui (prompt-move-until-valid) ] "0 3\n0 1" string>input output>store unit-test
+    move-request-message dup append assert-last-unit-test-output
+
+    [ 0 1 ] [ board ui (prompt-move-until-valid) ] "asdf\n0 1" string>input output>store unit-test
+    move-request-message dup append assert-last-unit-test-output
+
+    [ 0 1 ] [ board ui (prompt-move-until-valid) ] "0 0\n0 1" string>input output>store unit-test
+    move-request-message dup append assert-last-unit-test-output
+
+    [ 1 0 ] [ board ui (prompt-move-until-valid) ] "1 1\n1 0" string>input output>store unit-test
+    move-request-message dup append assert-last-unit-test-output
+
+]
 
 ! whitespace?
 [ t ] [ "  " whitespace? ] unit-test

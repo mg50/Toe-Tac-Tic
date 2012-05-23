@@ -4,16 +4,17 @@ IN: ttt.ui.console
 TUPLE: console-ui < ui ;
 
 CONSTANT: valid-move-regex R/ ^\d+ \d+\s*$/
-CONSTANT: move-request-message "Please enter your next move:"
+CONSTANT: move-request-message "Please enter your next move: "
 
 : <console-ui> ( -- c ) console-ui new ;
 
 M: console-ui print-message ( message ui -- ) drop write flush ;
 
-: valid-move-string? ( string -- ? ) valid-move-regex matches? ;
-
 ! Takes a string "x y" and pushes x and y onto the stack, where x and y are numbers.
 : parse-move-string ( string -- x y ) R/ \d+/ all-matching-subseqs [ string>number ] map 2array@ ;
+
+:: valid-move-string? ( string board -- ? ) string valid-move-regex matches?
+    [ string parse-move-string board available? ] [ f ] if ;
 
 : display-marker ( marker -- string ) {
     { [ dup X = ] [ drop "X" ] }
@@ -26,16 +27,13 @@ M: console-ui print-message ( message ui -- ) drop write flush ;
 : display-board ( board -- string ) [ display-column ] map dup make-separator join ;
 M: console-ui update-display ( board ui -- ) drop display-board "\n" append print ;
 
-: (prompt-move-until-valid) ( -- x y ) f
-    [ dup valid-move-string? ] [ drop readln ]
+:: (prompt-move-until-valid) ( board ui -- x y ) f
+    [ dup board valid-move-string? ]
+    [ move-request-message ui print-message
+      drop readln ]
     do until parse-move-string ;
 
-:: (prompt-move-until-available) ( board -- x y ) f f
-    [ 2dup board available? ]
-    [ 2drop (prompt-move-until-valid) ] do until ;
-
-M: console-ui prompt-move ( board ui -- x y )
-    move-request-message swap print-message (prompt-move-until-available) ;
+M: console-ui prompt-move ( board ui -- x y ) (prompt-move-until-valid) ;
 
 : whitespace? ( string -- ? ) R/ \s+/ matches? ;
 
