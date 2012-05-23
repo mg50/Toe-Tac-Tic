@@ -106,13 +106,13 @@ IN: ttt.core.tests
     [ t ] [ board right-diag { O O O } sequence= ] unit-test
 ]
 
-! lines
+! board-lines
 [let { { X O } { _ O } } :> board
-    [ t ] [ board lines { { X O } { _ O } { X _ } { O O } { O _ } } set= ] unit-test
+    [ t ] [ board board-lines { { X O } { _ O } { X _ } { O O } { O _ } } set= ] unit-test
 ]
 
 [let { { X O _ } { _ O X } { _ _ _ } } :> board
-    [ t ] [ board lines {
+    [ t ] [ board board-lines {
         { X O _ } { _ O X } { _ _ _ }
         { X _ _ } { O O _ } { _ X _ }
         { X O _ } { _ O _ }

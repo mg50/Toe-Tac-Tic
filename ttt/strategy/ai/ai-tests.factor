@@ -128,6 +128,24 @@ O-cache [ ] curry [ O cache-for-marker ] unit-test
 [ 1 ] [ { { X X _ } { X O O } { _ _ _ } } 4 -1 1 O ab-pruning-score ] unit-test
 [ 1 ] [ { { X O _ } { _ _ _ } { _ _ _ } } 7 -1 1 X ab-pruning-score ] unit-test
 
+! first-empty-coord
+[ 0 0 ] [ { { _ _ } { _ _ } } first-empty-coords ] unit-test
+[ 0 1 ] [ { { X _ } { _ _ } } first-empty-coords ] unit-test
+[ 1 0 ] [ { { X _ } { O _ } } first-empty-coords ] unit-test
+[ 1 1 ] [ { { X X } { O _ } } first-empty-coords ] unit-test
+[ { { X X } { O O } } first-empty-coords ] must-fail
+
+! if-4x4-opening
+[ f ] [ { { _ _ _ } { _ _ _ } { _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ f ] [ { { X O X } { X _ _ } { _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ t ] [ { { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ t ] [ { { _ X _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ t ] [ { { _ X O _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ t ] [ { { _ X O _ } { _ _ _ _ } { _ X _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ t ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ f ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ X _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+
+
 ! champion
 [ 3 ] [ { 1 2 3 } [ ] [ supremum ] champion ] unit-test
 [ 1 ] [ { 1 2 3 } [ ] [ infimum ] champion ] unit-test

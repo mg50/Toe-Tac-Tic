@@ -35,14 +35,14 @@ SYMBOL: _
 : right-diag ( board -- x ) dup length 1 - [ swap - swap nth ] curry map-index ;
 
 ! Retrieves all lines from a board, removing duplicates
-: lines ( board -- x ) { [ rows ] [ columns ] [ left-diag ] [  right-diag ] }
+: board-lines ( board -- x ) { [ rows ] [ columns ] [ left-diag ] [  right-diag ] }
     cleave 2array 3append members ;
 
 : board-full? ( board -- ? ) concat [ _ = ] any? not ;
 
 : winning-line ( marker board -- line ) length swap <array> ;
 
-: winner? ( marker board -- ? ) dup swapd winning-line [ = ] curry swap lines swap any? ;
+: winner? ( marker board -- ? ) dup swapd winning-line [ = ] curry swap board-lines swap any? ;
 : winner-exists? ( board -- ? ) [ X swap winner? ] [ O swap winner? ] bi or ;
 : draw? ( board -- ? ) [ winner-exists? not ] [ board-full? ] bi and ;
 : game-over? ( board -- ? ) [ winner-exists? ] [ board-full? ] bi or ;

@@ -74,6 +74,13 @@ CONSTANT: O-cache H{ }
 :: champion ( seq fitness-fn: ( el -- n ) selector: ( seq -- el ) -- el )
     seq fitness-fn map dup selector call swap index seq nth ; inline
 
+: first-empty-coords ( board -- x y ) empty-coords first 2array@ ;
+
+:: if-4x4-opening ( board quot1: ( ..a -- ..b ) quot2: ( ..a -- ..b ) -- x y )
+    board length 4 =
+    board concat [ _ = ] filter length 12 >=
+    and quot1 quot2 if ; inline
+
 M:: ai-strategy get-next-move ( marker board ui strategy -- x y ) [let
     board empty-coords :> empty-coords
     empty-coords length :> depth
