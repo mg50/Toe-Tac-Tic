@@ -136,14 +136,14 @@ O-cache [ ] curry [ O cache-for-marker ] unit-test
 [ { { X X } { O O } } first-empty-coords ] must-fail
 
 ! if-4x4-opening
-[ f ] [ { { _ _ _ } { _ _ _ } { _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ f ] [ { { X O X } { X _ _ } { _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ t ] [ { { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ t ] [ { { _ X _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ t ] [ { { _ X O _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ t ] [ { { _ X O _ } { _ _ _ _ } { _ X _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ t ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ _ _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
-[ f ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ X _ _ } } [ t ] [ f ] if-4x4-opening ] unit-test
+[ f ] [ { { _ _ _ } { _ _ _ } { _ _ _ } } 4x4-opening? ] unit-test
+[ f ] [ { { X O X } { X _ _ } { _ _ _ } } 4x4-opening? ] unit-test
+[ t ] [ { { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } 4x4-opening? ] unit-test
+[ t ] [ { { _ X _ _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } 4x4-opening? ] unit-test
+[ t ] [ { { _ X O _ } { _ _ _ _ } { _ _ _ _ } { _ _ _ _ } } 4x4-opening? ] unit-test
+[ t ] [ { { _ X O _ } { _ _ _ _ } { _ X _ _ } { _ _ _ _ } } 4x4-opening? ] unit-test
+[ t ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ _ _ _ } } 4x4-opening? ] unit-test
+[ f ] [ { { _ X O _ } { _ O _ _ } { _ X _ _ } { _ X _ _ } } 4x4-opening? ] unit-test
 
 
 ! champion
@@ -153,14 +153,10 @@ O-cache [ ] curry [ O cache-for-marker ] unit-test
 [ 1 ] [ { 1 2 3 } [ -1 * ] [ supremum ] champion ] unit-test
 [ { } [ ] [ supremum ] champion ] must-fail
 
-! get-next-move
-[let
-    ai-strategy new :> strat
+! standard-get-next-move
+[ 0 0 ] [ X { { _ X } { _ _ } } standard-get-next-move ] unit-test
+[ 0 0 ] [ O { { _ O } { _ _ } } standard-get-next-move ] unit-test
 
-    [ 0 0 ] [ X { { _ X } { _ _ } } f strat get-next-move ] unit-test
-    [ 0 0 ] [ O { { _ O } { _ _ } } f strat get-next-move ] unit-test
-
-    [ 2 2 ] [ X { { X O O } { O X _ } { _ _ _ } } f strat get-next-move ] unit-test
-    [ 1 1 ] [ O { { X _ _ } { _ _ _ } { _ _ _ } } f strat get-next-move ] unit-test
-    [ 1 0 ] [ X { { X _ _ } { O _ _ } { _ _ _ } } f strat get-next-move ] unit-test
-]
+[ 2 2 ] [ X { { X O O } { O X _ } { _ _ _ } } standard-get-next-move ] unit-test
+[ 1 1 ] [ O { { X _ _ } { _ _ _ } { _ _ _ } } standard-get-next-move ] unit-test
+[ 1 0 ] [ X { { X _ _ } { O _ _ } { _ _ _ } } standard-get-next-move ] unit-test
