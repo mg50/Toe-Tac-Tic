@@ -96,5 +96,5 @@ CONSTANT: O-cache H{ }
 
 M:: ai-strategy get-next-move ( marker board ui strategy -- x y )
     board 4x4-opening?
-    [ marker board standard-get-next-move ] [ board first-empty-coords ]
+    [ board first-empty-coords ] [ marker board standard-get-next-move ]
     if ; inline
