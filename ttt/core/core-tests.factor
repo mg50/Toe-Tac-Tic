@@ -49,14 +49,14 @@ IN: ttt.core.tests
 
 
 
-! (move!) tests
+! move! tests
 [ O ] [ [let { { X } } :> board
-    O 0 0 board (move!)
+    O 0 0 board move!
     0 0 board marker-at
 ] ] unit-test
 [let { { O _ } { _ O } } :> board
-    [ t ] [ X 1 0 board (move!)
-            O 0 1 board (move!)
+    [ t ] [ X 1 0 board move!
+            O 0 1 board move!
             board { { O X } { O O } } sequence=
     ] unit-test
 ]

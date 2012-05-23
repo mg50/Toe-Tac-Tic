@@ -21,10 +21,10 @@ SYMBOL: _
 : available? ( x y board -- ? ) [ 3array ] [ ] 3bi in-bounds? [ 3array@ occupied? not ] [ drop f ] if ;
 
 ! Destructively changes a board cell to a marker
-: (move!) ( marker x y board -- ) nth set-nth ;
+: move! ( marker x y board -- ) nth set-nth ;
 
 ! Returns a mutated copy of a board with a marker placed in a cell
-: (move) ( marker x y board -- board' ) [ clone ] map dup [ (move!) ] dip ;
+: (move) ( marker x y board -- board' ) [ clone ] map dup [ move! ] dip ;
 
 : try-move ( marker x y board -- board? ) 3dup occupied?
     [ drop 3drop f ] [ (move) ] if ;

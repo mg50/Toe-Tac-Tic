@@ -11,5 +11,5 @@ TUPLE: player marker strategy ;
     player strategy>> :> strat
     player marker>> :> marker
 
-    marker dup board ui strat get-next-move board (move!)
+    marker dup board ui strat get-next-move board move!
 ] ;
