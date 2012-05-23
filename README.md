@@ -14,4 +14,4 @@ To run the tests, enter:
 
 `${YOUR-PATH-TO-FACTOR}/factor -run=ttt -test`
 
-To learn more abotu the Factor language, get started with the [Factor Coorkbook](http://docs.factorcode.org/content/article-cookbook.html) to learn the basic nuances. Aterwards, peruse the [Factor language docs](http://docs.factorcode.org/content/article-handbook-language-reference.html) to refer to the core library.
+To learn more about the Factor language, get started with the [Factor Cookbook](http://docs.factorcode.org/content/article-cookbook.html) for the basic nuances. Aterwards, peruse the [Factor language docs](http://docs.factorcode.org/content/article-handbook-language-reference.html) to refer to the core library.
