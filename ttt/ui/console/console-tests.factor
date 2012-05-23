@@ -93,3 +93,7 @@ IN: ttt.ui.console.tests
 [ 0 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "blah\na\n" string>input output>store unit-test
 "Test message (options: a/b/c): Test message (options: a/b/c): " assert-last-unit-test-output
 [ 2 ] [ "Test message" { "a" "b" "c" } <console-ui> prompt-options ] "blah\nc\n" string>input output>store unit-test
+
+! before-game-start
+[ ] [ <console-ui> before-game-start ] output>store unit-test
+instructions assert-last-unit-test-output
