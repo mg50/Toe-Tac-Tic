@@ -14,5 +14,6 @@ To run the tests, enter:
 
 Note that there will be a lot of output from the unit tests, so you may want to store it in another file:
 
-`${YOUR-PATH-TO-FACTOR}/factor -run=ttt > /tmp/factortests`\n
+`${YOUR-PATH-TO-FACTOR}/factor -run=ttt > /tmp/factortests`
+
 `vi /tmp/factortests`
