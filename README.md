@@ -1,6 +1,6 @@
 A version of Tic-Tac-Toe implemented in Factor.
 
-After installing Factor from the [website](http://factorcode.org/), symlink the `ttt` directory in this repository as follows:
+After installing the development release of Factor from the [website](http://factorcode.org/), symlink the `ttt` directory in this repository as follows:
 
 `ln -s $(pwd) ${YOUR-PATH-TO-FACTOR}/work/ttt`
 
