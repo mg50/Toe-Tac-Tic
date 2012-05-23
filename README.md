@@ -4,7 +4,7 @@ After installing the development release of Factor from the [website](http://fac
 
 `ln -s $(pwd)ttt ${YOUR-PATH-TO-FACTOR}/work/ttt`
 
-If you're not in the project root, make sure you're symlinking the absolute path to the ttt directory. After doing this, you can run TTT by entering:
+If you're not in the project root, make sure you're symlinking the absolute path to the `ttt` directory. After doing this, you can run TTT by entering:
 
 `${YOUR-PATH-TO-FACTOR}/factor -run=ttt`
 
